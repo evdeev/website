@@ -2,7 +2,7 @@
 title: Почему я выбрал Astro для личного сайта
 slug: why-i-chose-astro
 description: Почему для личного сайта оказался важен не только стек, но и удобство работы с AI-помощниками.
-created: 2026-05-31
+created: '2026-05-31T12:49:01+03:00'
 draft: false
 tags:
   - astro

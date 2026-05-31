@@ -2,7 +2,7 @@
 title: Почему личный сайт в 2026 году снова актуален
 slug: relevance-of-personal-website
 description: О том, почему спустя много лет я снова решил завести собственный сайт.
-created: 2026-05-31
+created: '2026-05-31T22:30:42+03:00'
 draft: false
 tags:
   - сайт
