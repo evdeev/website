@@ -1,0 +1,21 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  title: string;
+  description: string;
+  documentTitle?: string;
+  showTitle?: boolean;
+}
+
+const { title, description, documentTitle = `${title} Бориса Евдеева`, showTitle = true } = Astro.props;
+const displayTitle = typografText(title);
+---
+
+<BaseLayout documentTitle={documentTitle} description={description}>
+  <article class="content page-content">
+    {showTitle && <h1>{displayTitle}</h1>}
+    <slot />
+  </article>
+</BaseLayout>

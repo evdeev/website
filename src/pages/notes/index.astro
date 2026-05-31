@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatNoteDate, getNotesCountLabel, sortNotes } from '../../lib/notes';
+import { typografText } from '../../lib/typography.mjs';
+import { siteConfig } from '../../site.config';
+
+const notes = sortNotes(await getCollection('notes', ({ data }) => !data.draft));
+const { initialVisibleCount } = siteConfig.notes;
+const hasHiddenNotes = notes.length > initialVisibleCount;
+---
+
+<BaseLayout
+  documentTitle="Заметки Бориса Евдеева"
+  description="Заметки Бориса Евдеева о продуктах, технологиях и личных проектах."
+  showBackToTop
+>
+  <section class="content notes-page">
+    <p class="section-label">Заметки</p>
+    <h1>{getNotesCountLabel(notes.length)}</h1>
+    <ol class="notes-list">
+      {notes.map((note, index) => (
+        <li class:list={{ 'is-hidden': index >= initialVisibleCount }}>
+          <h2><a href={`/notes/${note.data.slug}`}>{typografText(note.data.title)}</a></h2>
+          <p class="note-meta">
+            <time datetime={note.data.created.toISOString()}>{formatNoteDate(note.data.created)}</time>
+            {note.data.tags.length > 0 && <span aria-hidden="true"> · </span>}
+            {note.data.tags.length > 0 && <span class="note-tag">{typografText(note.data.tags.join(', '))}</span>}
+          </p>
+        </li>
+      ))}
+    </ol>
+    {hasHiddenNotes && <button class="show-more-notes" type="button">Показать ещё ↓</button>}
+  </section>
+  <script>
+    const button = document.querySelector('.show-more-notes');
+
+    button?.addEventListener('click', () => {
+      document.querySelectorAll('.notes-list .is-hidden').forEach((note) => {
+        note.classList.remove('is-hidden');
+      });
+      button.remove();
+    });
+  </script>
+</BaseLayout>

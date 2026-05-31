@@ -1,0 +1,21 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const page = await getEntry('pages', 'home');
+
+if (!page) {
+  throw new Error('Home page content is missing');
+}
+
+const { Content } = await render(page);
+---
+
+<PageLayout
+  title={page.data.title}
+  documentTitle="Борис Евдеев"
+  description={page.data.description}
+  showTitle={false}
+>
+  <Content />
+</PageLayout>

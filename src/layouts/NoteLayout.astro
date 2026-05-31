@@ -1,0 +1,56 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  title: string;
+  description: string;
+  created: Date;
+  tags: string[];
+  nextNote?: CollectionEntry<'notes'>;
+  previousNote?: CollectionEntry<'notes'>;
+}
+
+const { title, description, created, tags, nextNote, previousNote } = Astro.props;
+const displayTitle = typografText(title);
+const displayDescription = typografText(description);
+const formattedDate = new Intl.DateTimeFormat('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(created);
+---
+
+<BaseLayout documentTitle={title} description={description} showBackToTop>
+  <article class="content note-content">
+    <header class="note-header">
+      <p class="note-date"><time datetime={created.toISOString()}>{formattedDate}</time></p>
+      <h1>{displayTitle}</h1>
+      <p class="note-description">{displayDescription}</p>
+      {tags.length > 0 && <p class="note-tags">{tags.map((tag) => `#${tag}`).join(' ')}</p>}
+    </header>
+    <slot />
+    <footer class="note-navigation">
+      <nav class="note-neighbors" aria-label="Соседние заметки">
+        <div>
+          {previousNote && (
+            <a class="previous-note" href={`/notes/${previousNote.data.slug}`}>
+              <span aria-hidden="true">←</span>
+              <span>{typografText(previousNote.data.title)}</span>
+            </a>
+          )}
+        </div>
+        <div>
+          {nextNote && (
+            <a class="next-note" href={`/notes/${nextNote.data.slug}`}>
+              <span>{typografText(nextNote.data.title)}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+      </nav>
+      <a class="all-notes-link" href="/notes">Все заметки ↓</a>
+    </footer>
+  </article>
+</BaseLayout>
