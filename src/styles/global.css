@@ -5,11 +5,12 @@
   text-rendering: optimizeLegibility;
   --background: #fdfdfc;
   --text: #242424;
-  --muted: #6b6b67;
-  --border: #e5e5e1;
+  --muted: #6f6f6a;
+  --border: #e7e7e2;
   --link: #245b9e;
   --link-hover: #153f74;
-  --content-width: 70ch;
+  --content-width: 64ch;
+  --text-width: 62ch;
 }
 
 * {
@@ -65,6 +66,7 @@ main {
   color: var(--text);
   font-size: 0.94rem;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .site-nav a:hover {
@@ -81,7 +83,13 @@ main {
 }
 
 .content {
-  padding-block: 64px 48px;
+  padding-block: clamp(42px, 7vw, 72px) 48px;
+}
+
+.page-content {
+  max-width: var(--text-width);
+  font-size: clamp(17px, 0.25vw + 16px, 18px);
+  line-height: 1.62;
 }
 
 h1,
@@ -93,38 +101,37 @@ h3 {
 }
 
 h1 {
-  margin: 0 0 28px;
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  line-height: 1.05;
+  margin: 0 0 24px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.08;
 }
 
 h2 {
-  margin: 2.25em 0 0.65em;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1.15;
+  margin: 2.1em 0 0.65em;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  line-height: 1.18;
+  font-weight: 650;
 }
 
 h3 {
   margin: 2em 0 0.6em;
-  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  font-size: clamp(1.2rem, 1.3vw, 1.45rem);
   line-height: 1.25;
   font-weight: 600;
 }
 
-p,
-ul,
-ol,
-blockquote {
-  margin-block: 1em;
+p {
+  margin-block: 0;
 }
 
-.content p + p {
-  margin-top: 1.2em;
+p + p {
+  margin-top: 1.05em;
 }
 
 ul,
 ol {
-  padding-left: 1.35em;
+  margin-block: 1.1em;
+  padding-left: 1.4em;
 }
 
 li + li {
@@ -133,24 +140,25 @@ li + li {
 
 table {
   display: block;
-  width: max-content;
+  width: 100%;
   max-width: 100%;
-  margin-block: 2.5em;
+  margin-block: 2em;
   border-collapse: collapse;
   overflow-x: auto;
-  font-size: 0.95rem;
+  font-size: 0.92em;
+  line-height: 1.45;
   -webkit-overflow-scrolling: touch;
 }
 
 th,
 td {
-  padding: 12px 16px;
+  padding: 10px 12px;
   text-align: left;
   border-bottom: 1px solid var(--border);
 }
 
 th {
-  font-weight: 700;
+  font-weight: 650;
 }
 
 th.numeric,
@@ -160,10 +168,12 @@ td.numeric {
 }
 
 blockquote {
-  margin: 3em 0;
+  margin: 2.2em 0;
+  padding-left: 1.1em;
+  border-left: 3px solid var(--border);
   color: #4b4b47;
-  font-size: 1.35em;
-  line-height: 1.5;
+  font-size: 1.08em;
+  line-height: 1.55;
 }
 
 blockquote p {
@@ -171,7 +181,7 @@ blockquote p {
 }
 
 .note-header {
-  margin-bottom: 3.5em;
+  margin-bottom: 2.4em;
 }
 
 .note-header h1 {
@@ -198,26 +208,37 @@ blockquote p {
 }
 
 .note-content {
-  font-size: clamp(18px, 0.45vw + 16.5px, 20px);
-  line-height: 1.7;
+  max-width: var(--text-width);
+  font-size: clamp(18px, 0.35vw + 17px, 20px);
+  line-height: 1.68;
+}
+
+.note-content p + p {
+  margin-top: 1.05em;
 }
 
 .note-content > h2 {
-  margin: 3em 0 1em;
+  margin: 2.6em 0 0.7em;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  line-height: 1.18;
+  font-weight: 650;
 }
 
 .note-content > h3 {
-  margin: 2em 0 0.8em;
+  margin: 2em 0 0.6em;
+  font-size: clamp(1.2rem, 1.3vw, 1.45rem);
+  line-height: 1.25;
+  font-weight: 600;
 }
 
 .note-content > ul,
 .note-content > ol {
-  margin-block: 1.5em;
+  margin-block: 1.2em;
 }
 
 .note-content > ul li + li,
 .note-content > ol li + li {
-  margin-top: 0.65em;
+  margin-top: 0.45em;
 }
 
 .note-content > hr {
@@ -253,27 +274,42 @@ blockquote p {
 
 .notes-list {
   padding: 0;
-  margin-top: 42px;
+  margin-top: 36px;
   list-style: none;
 }
 
 .notes-list li {
-  padding-block: 11px;
+  padding-block: 10px;
 }
 
 .notes-list li + li {
-  margin-top: 7px;
+  margin-top: 0;
 }
 
 .notes-list h2 {
   margin: 0;
-  font-size: 1.22rem;
-  line-height: 1.25;
+  font-size: clamp(1.08rem, 0.4vw + 1rem, 1.25rem);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+.notes-list h2 a {
+  color: var(--text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .note-meta {
-  margin: 4px 0 0;
-  line-height: 1.45;
+  margin: 3px 0 0;
+  line-height: 1.4;
+}
+
+.home-page > p:first-of-type {
+  margin-bottom: 1.1em;
+  font-size: clamp(1.35rem, 1.4vw + 1rem, 2rem);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
 }
 
 .notes-list .is-hidden {
@@ -360,7 +396,7 @@ blockquote p {
   .site-header,
   .site-footer,
   main {
-    width: min(calc(100% - 28px), var(--content-width));
+    width: min(calc(100% - 36px), var(--content-width));
   }
 
   .site-nav,
@@ -369,11 +405,20 @@ blockquote p {
   }
 
   .content {
-    padding-block: 48px 36px;
+    padding-block: 40px 36px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 10vw, 2.4rem);
   }
 
   .note-header {
-    margin-bottom: 2.8em;
+    margin-bottom: 2em;
+  }
+
+  .note-content {
+    font-size: 18px;
+    line-height: 1.62;
   }
 
   .note-content > h2 {
@@ -381,8 +426,7 @@ blockquote p {
   }
 
   .note-content blockquote {
-    margin-block: 2.4em;
-    font-size: 1.22em;
+    margin-block: 2.2em;
   }
 
   .note-neighbors {
