@@ -7,14 +7,15 @@ interface Props {
   description: string;
   documentTitle?: string;
   showTitle?: boolean;
+  class?: string;
 }
 
-const { title, description, documentTitle = `${title} Бориса Евдеева`, showTitle = true } = Astro.props;
+const { title, description, documentTitle = `${title} Бориса Евдеева`, showTitle = true, class: className } = Astro.props;
 const displayTitle = typografText(title);
 ---
 
 <BaseLayout documentTitle={documentTitle} description={description}>
-  <article class="content page-content">
+  <article class:list={['content', 'page-content', className]}>
     {showTitle && <h1>{displayTitle}</h1>}
     <slot />
   </article>
