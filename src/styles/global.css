@@ -91,6 +91,7 @@ main {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
+  column-gap: 18px;
   row-gap: 4px;
 }
 
@@ -125,16 +126,16 @@ main {
 
 .site-links a {
   color: var(--muted);
-}
-
-.site-links a + a::before {
-  content: '·';
-  margin-inline: 0.55em;
-  color: var(--muted);
+  font-weight: 400;
 }
 
 .site-links a:hover {
   color: var(--text);
+}
+
+.site-links .is-active {
+  color: var(--text);
+  font-weight: 600;
 }
 
 main {
@@ -326,36 +327,56 @@ blockquote p {
   line-height: 1.5;
 }
 
-.notes-list {
+.note-listing-list {
   padding: 0;
-  margin-top: 36px;
+  margin: 0;
   list-style: none;
 }
 
-.notes-list li {
-  padding-block: 10px;
+.notes-page .note-listing-list {
+  margin-top: 36px;
 }
 
-.notes-list li + li {
-  margin-top: 0;
+.note-listing-item + .note-listing-item {
+  margin-top: 26px;
 }
 
-.notes-list h2 {
+.note-listing-item h2,
+.note-listing-item h3 {
   margin: 0;
-  font-size: clamp(1.08rem, 0.4vw + 1rem, 1.25rem);
-  line-height: 1.35;
+  font-size: clamp(1.08rem, 0.45vw + 1rem, 1.25rem);
   font-weight: 500;
-  letter-spacing: normal;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
-.notes-list h2 a {
+.note-listing-item h2 a,
+.note-listing-item h3 a {
   color: var(--text);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.4em;
+  transition: text-decoration-color 160ms ease;
 }
 
-.note-meta {
-  margin: 3px 0 0;
+.note-listing-item h2 a:hover,
+.note-listing-item h3 a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+.note-listing-description {
+  max-width: 58ch;
+  margin-top: 7px;
+  color: #4d4d48;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.note-listing-date {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.82rem;
   line-height: 1.4;
 }
 
@@ -386,52 +407,6 @@ blockquote p {
   margin: 0 0 28px;
   font-size: 1.875rem;
   font-weight: 650;
-}
-
-.home-notes-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.home-notes-list li + li {
-  margin-top: 26px;
-}
-
-.home-notes-list h3 {
-  margin: 0;
-  font-size: clamp(1.08rem, 0.45vw + 1rem, 1.25rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-}
-
-.home-notes-list h3 a {
-  color: var(--text);
-  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
-  text-decoration-thickness: 0.04em;
-  text-underline-offset: 0.4em;
-  transition: text-decoration-color 160ms ease;
-}
-
-.home-notes-list h3 a:hover {
-  color: var(--text);
-  text-decoration-color: currentColor;
-}
-
-.home-note-description {
-  max-width: 58ch;
-  margin-top: 7px;
-  color: #4d4d48;
-  font-size: 0.98rem;
-  line-height: 1.5;
-}
-
-.home-note-date {
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.4;
 }
 
 .home-notes .all-notes-link {

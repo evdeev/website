@@ -1,10 +1,17 @@
+---
+const { pathname } = Astro.url;
+const isNotes = pathname === '/notes' || pathname.startsWith('/notes/');
+const isCareer = pathname === '/career' || pathname === '/career/';
+const isLists = pathname === '/lists' || pathname.startsWith('/lists/');
+---
+
 <header class="site-header" id="top">
   <nav class="site-nav" aria-label="Основная навигация">
     <a class="site-name" href="/">Борис Евдеев</a>
     <div class="site-links">
-      <a href="/notes">Заметки</a>
-      <a href="/career">Карьера</a>
-      <a href="/lists">Списки</a>
+      <a class:list={{ 'is-active': isNotes }} aria-current={isNotes ? 'page' : undefined} href="/notes">Заметки</a>
+      <a class:list={{ 'is-active': isCareer }} aria-current={isCareer ? 'page' : undefined} href="/career">Карьера</a>
+      <a class:list={{ 'is-active': isLists }} aria-current={isLists ? 'page' : undefined} href="/lists">Списки</a>
     </div>
   </nav>
 </header>

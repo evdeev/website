@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatNoteDate } from '../lib/notes';
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+  headingLevel: 'h2' | 'h3';
+  class?: string;
+}
+
+const { note, headingLevel: Heading, class: className } = Astro.props;
+---
+
+<li class:list={['note-listing-item', className]}>
+  <Heading><a href={`/notes/${note.data.slug}`}>{typografText(note.data.title)}</a></Heading>
+  <p class="note-listing-description">{typografText(note.data.description)}</p>
+  <p class="note-listing-date">
+    <time datetime={note.data.created.toISOString()}>{formatNoteDate(note.data.created)}</time>
+  </p>
+</li>

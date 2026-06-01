@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatNoteDate } from '../lib/notes';
-import { typografText } from '../lib/typography.mjs';
+import NoteListItem from './NoteListItem.astro';
 
 interface Props {
   notes: CollectionEntry<'notes'>[];
@@ -12,15 +11,9 @@ const { notes } = Astro.props;
 
 <section class="home-notes" aria-labelledby="home-notes-title">
   <h2 id="home-notes-title">Заметки</h2>
-  <ol class="home-notes-list">
+  <ol class="note-listing-list">
     {notes.map((note) => (
-      <li>
-        <h3><a href={`/notes/${note.data.slug}`}>{typografText(note.data.title)}</a></h3>
-        <p class="home-note-description">{typografText(note.data.description)}</p>
-        <p class="home-note-date">
-          <time datetime={note.data.created.toISOString()}>{formatNoteDate(note.data.created)}</time>
-        </p>
-      </li>
+      <NoteListItem note={note} headingLevel="h3" />
     ))}
   </ol>
   <a class="all-notes-link" href="/notes">Все заметки →</a>

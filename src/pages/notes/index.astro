@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import NoteListItem from '../../components/NoteListItem.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatNoteDate, sortNotes } from '../../lib/notes';
-import { typografText } from '../../lib/typography.mjs';
+import { sortNotes } from '../../lib/notes';
 import { siteConfig } from '../../site.config';
 
 const notes = sortNotes(await getCollection('notes', ({ data }) => !data.draft));
@@ -18,16 +18,9 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
 >
   <section class="content notes-page">
     <SectionTitle title="Заметки" />
-    <ol class="notes-list">
+    <ol class="note-listing-list notes-list">
       {notes.map((note, index) => (
-        <li class:list={{ 'is-hidden': index >= initialVisibleCount }}>
-          <h2><a href={`/notes/${note.data.slug}`}>{typografText(note.data.title)}</a></h2>
-          <p class="note-meta">
-            <time datetime={note.data.created.toISOString()}>{formatNoteDate(note.data.created)}</time>
-            {note.data.tags.length > 0 && <span aria-hidden="true"> · </span>}
-            {note.data.tags.length > 0 && <span class="note-tag">{typografText(note.data.tags.join(', '))}</span>}
-          </p>
-        </li>
+        <NoteListItem note={note} headingLevel="h2" class={index >= initialVisibleCount ? 'is-hidden' : undefined} />
       ))}
     </ol>
     {hasHiddenNotes && <button class="show-more-notes" type="button">Показать ещё ↓</button>}
