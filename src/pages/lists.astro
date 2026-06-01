@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { lists } from '../lib/lists';
+---
+
+<BaseLayout
+  documentTitle="Списки Бориса Евдеева"
+  description="Списки Бориса Евдеева: игры, фильмы и желания."
+>
+  <section class="content lists-page">
+    <SectionTitle title="Списки" />
+    <ul class="lists-list">
+      {lists.map((list) => (
+        <li>
+          <span class="list-name">{list.title}</span>
+          <span class="list-status">{list.status}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import SectionTitle from '../../components/SectionTitle.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatNoteDate, getNotesCountLabel, sortNotes } from '../../lib/notes';
+import { formatNoteDate, sortNotes } from '../../lib/notes';
 import { typografText } from '../../lib/typography.mjs';
 import { siteConfig } from '../../site.config';
 
@@ -16,8 +17,7 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
   showBackToTop
 >
   <section class="content notes-page">
-    <p class="section-label">Заметки</p>
-    <h1>{getNotesCountLabel(notes.length)}</h1>
+    <SectionTitle title="Заметки" />
     <ol class="notes-list">
       {notes.map((note, index) => (
         <li class:list={{ 'is-hidden': index >= initialVisibleCount }}>

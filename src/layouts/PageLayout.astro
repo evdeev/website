@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
 import { typografText } from '../lib/typography.mjs';
 
 interface Props {
@@ -16,7 +17,7 @@ const displayTitle = typografText(title);
 
 <BaseLayout documentTitle={documentTitle} description={description}>
   <article class:list={['content', 'page-content', className]}>
-    {showTitle && <h1>{displayTitle}</h1>}
+    {showTitle && <SectionTitle title={displayTitle} />}
     <slot />
   </article>
 </BaseLayout>

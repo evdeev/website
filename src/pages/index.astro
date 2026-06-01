@@ -1,6 +1,8 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
+import HomeNotes from '../components/HomeNotes.astro';
 import PageLayout from '../layouts/PageLayout.astro';
+import { sortNotes } from '../lib/notes';
 
 const page = await getEntry('pages', 'home');
 
@@ -9,6 +11,7 @@ if (!page) {
 }
 
 const { Content } = await render(page);
+const recentNotes = sortNotes(await getCollection('notes', ({ data }) => !data.draft)).slice(0, 3);
 ---
 
 <PageLayout
@@ -18,5 +21,9 @@ const { Content } = await render(page);
   showTitle={false}
   class="home-page"
 >
-  <Content />
+  <div class="home-intro">
+    <h1 class="visually-hidden">Борис Евдеев</h1>
+    <Content />
+  </div>
+  <HomeNotes notes={recentNotes} />
 </PageLayout>

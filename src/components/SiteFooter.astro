@@ -1,0 +1,23 @@
+---
+interface Props {
+  showBackToTop?: boolean;
+}
+
+const { showBackToTop = false } = Astro.props;
+---
+
+<footer class="site-footer">
+  <address class="footer-contact">
+    <strong>Борис Евдеев</strong>
+    <span>Нижний Новгород → Москва</span>
+    <a href="mailto:evdeev@gmail.com">evdeev@gmail.com</a>
+  </address>
+  {showBackToTop && (
+    <a
+      class="back-to-top"
+      href="#top"
+    >
+      Наверх ↑
+    </a>
+  )}
+</footer>

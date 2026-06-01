@@ -1,6 +1,8 @@
 ---
-import '../styles/global.css';
+import globalStyles from '../styles/global.css?raw';
 import { typografText } from '../lib/typography.mjs';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 
 interface Props {
   documentTitle: string;
@@ -22,31 +24,13 @@ const displayDescription = typografText(description);
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Б</text></svg>" />
     <meta name="generator" content={Astro.generator} />
     <title>{displayTitle}</title>
+    <style is:inline set:html={globalStyles}></style>
   </head>
   <body>
-    <header class="site-header" id="top">
-      <nav class="site-nav" aria-label="Основная навигация">
-        <a class="site-name" href="/">Борис Евдеев</a>
-        <div class="site-links">
-          <a href="/notes">Заметки</a>
-          <a href="/career">Карьера</a>
-        </div>
-      </nav>
-    </header>
+    <SiteHeader />
     <main>
       <slot />
     </main>
-    <footer class="site-footer">
-      <p>© {new Date().getFullYear()} Борис Евдеев</p>
-      {showBackToTop && (
-        <a
-          class="back-to-top"
-          href="#top"
-        >
-          Наверх ↑
-        </a>
-      )}
-      {showBackToTop && <span aria-hidden="true"></span>}
-    </footer>
+    <SiteFooter showBackToTop={showBackToTop} />
   </body>
 </html>
