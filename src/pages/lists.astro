@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { lists } from '../lib/lists';
+
+const activeLists = lists.filter((list) => list.href);
+const upcomingLists = lists.filter((list) => !list.href);
 ---
 
 <BaseLayout
@@ -12,14 +15,23 @@ import { lists } from '../lib/lists';
     <SectionTitle title="Списки" />
     <p class="lists-intro">Здесь будут списки книг, фильмов, игр и вещей, которые хочется сохранить.</p>
     <ul class="lists-list">
-      {lists.map((list) => (
-        <li>
-          {list.href
-            ? <a class="list-name" href={list.href}>{list.title}</a>
-            : <span class="list-name">{list.title}</span>}
-          {list.status && <span class="list-status">{list.status}</span>}
+      {activeLists.map((list) => (
+        <li class="list-section-item">
+          <h2 class="list-section-title"><a href={list.href}>{list.title}</a></h2>
+          <p class="list-section-description">{list.description}</p>
         </li>
       ))}
     </ul>
+    <section class="upcoming-lists" aria-labelledby="upcoming-lists-title">
+      <h2 class="lists-subtitle" id="upcoming-lists-title">Скоро</h2>
+      <ul class="lists-list">
+        {upcomingLists.map((list) => (
+          <li class="list-section-item is-upcoming">
+            <h3 class="list-section-title">{list.title}</h3>
+            <p class="list-section-description">{list.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
   </section>
 </BaseLayout>
