@@ -268,9 +268,9 @@ blockquote p {
 }
 
 .note-content {
-  max-width: 680px;
-  font-size: clamp(17px, 0.22vw + 16.5px, 18px);
-  line-height: 1.66;
+  max-width: 660px;
+  font-size: clamp(17px, 0.28vw + 16.5px, 19px);
+  line-height: 1.68;
 }
 
 .note-content p + p {
@@ -481,10 +481,24 @@ blockquote p {
   gap: 24px;
 }
 
-.career-period {
-  margin: 3px 0 0;
+.career-timeline-meta {
+  padding-top: 1px;
+}
+
+.career-company {
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.3em;
+}
+
+.career-period {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
   line-height: 1.45;
 }
 
@@ -517,21 +531,6 @@ blockquote p {
   line-height: 1.3;
 }
 
-.career-timeline h2 a {
-  color: var(--text);
-  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
-  text-decoration-thickness: 0.04em;
-  text-underline-offset: 0.35em;
-}
-
-.career-role {
-  max-width: 58ch;
-  margin: 7px 0 0;
-  color: #3f3f3b;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
 .career-location,
 .career-summary {
   max-width: 58ch;
@@ -543,6 +542,14 @@ blockquote p {
 
 .career-summary {
   color: #4d4d48;
+}
+
+.career-official-role {
+  max-width: 58ch;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
 .career-details {
@@ -570,8 +577,15 @@ blockquote p {
 
 .lists-list {
   padding: 0;
-  margin: 0;
+  margin: 24px 0 0;
   list-style: none;
+}
+
+.lists-intro {
+  max-width: 58ch;
+  color: #4d4d48;
+  font-size: 0.98rem;
+  line-height: 1.5;
 }
 
 .lists-list li {
@@ -646,6 +660,18 @@ blockquote p {
   font-size: 0.82rem;
   line-height: 1.4;
   text-decoration: none;
+}
+
+.note-neighbor-title {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 34%, transparent);
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.38em;
+  transition: text-decoration-color 160ms ease;
+}
+
+.note-neighbor-link:hover .note-neighbor-title {
+  text-decoration-color: currentColor;
 }
 
 .next-note {
@@ -765,8 +791,12 @@ blockquote p {
     display: block;
   }
 
+  .career-timeline-meta {
+    margin: 0 0 10px 20px;
+  }
+
   .career-period {
-    margin: 0 0 8px 20px;
+    margin-top: 4px;
   }
 
   .career-timeline-content {

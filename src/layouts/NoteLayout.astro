@@ -36,17 +36,17 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
         {previousNote && (
           <a class="note-neighbor-link previous-note" href={`/notes/${previousNote.data.slug}`}>
             <span class="note-neighbor-label">← Предыдущая заметка</span>
-            <span>{typografText(previousNote.data.title)}</span>
+            <span class="note-neighbor-title">{typografText(previousNote.data.title)}</span>
           </a>
         )}
         {nextNote && (
           <a class="note-neighbor-link next-note" href={`/notes/${nextNote.data.slug}`}>
             <span class="note-neighbor-label">Следующая заметка →</span>
-            <span>{typografText(nextNote.data.title)}</span>
+            <span class="note-neighbor-title">{typografText(nextNote.data.title)}</span>
           </a>
         )}
       </nav>
-      <a class="section-link all-notes-link" href="/notes">Все заметки ↓</a>
+      <a class="section-link all-notes-link" href="/notes">Все заметки ←</a>
     </footer>
   </article>
 </BaseLayout>

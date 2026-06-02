@@ -1,5 +1,6 @@
 export const lists = [
-  { title: 'Игры', status: 'Скоро' },
+  { title: 'Книги', status: 'Скоро' },
   { title: 'Фильмы', status: 'Скоро' },
-  { title: 'Желания', status: 'Скоро' },
+  { title: 'Игры', status: 'Скоро' },
+  { title: 'Вишлист', status: 'Скоро' },
 ];

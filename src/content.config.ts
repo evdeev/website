@@ -30,7 +30,8 @@ const career = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/career' }),
   schema: z.object({
     title: z.string(),
-    role: z.string(),
+    headline: z.string(),
+    official_role: z.string().optional(),
     start: careerDate,
     end: z.union([careerDate, z.literal('present')]),
     summary: z.string(),

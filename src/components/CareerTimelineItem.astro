@@ -12,15 +12,18 @@ const companyTitle = typografText(career.data.title);
 ---
 
 <li class="career-timeline-item">
-  <p class="career-period">{formatCareerPeriod(career.data.start, career.data.end)}</p>
+  <div class="career-timeline-meta">
+    {career.data.company_url
+      ? <a class="career-company" href={career.data.company_url}>{companyTitle}</a>
+      : <span class="career-company">{companyTitle}</span>}
+    <p class="career-period">{formatCareerPeriod(career.data.start, career.data.end)}</p>
+    <p class="career-location">{typografText(career.data.location)}</p>
+  </div>
   <div class="career-timeline-content">
     <span class="career-timeline-marker" aria-hidden="true"></span>
-    <h2>
-      {career.data.company_url ? <a href={career.data.company_url}>{companyTitle}</a> : companyTitle}
-    </h2>
-    <p class="career-role">{typografText(career.data.role)}</p>
-    <p class="career-location">{typografText(career.data.location)}</p>
+    <h2>{typografText(career.data.headline)}</h2>
     <p class="career-summary">{typografText(career.data.summary)}</p>
+    {career.data.official_role && <p class="career-official-role">{typografText(career.data.official_role)}</p>}
     <div class="career-details">
       <slot />
     </div>
