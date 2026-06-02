@@ -41,4 +41,20 @@ const career = defineCollection({
   }),
 });
 
-export const collections = { pages, notes, career };
+const games = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/lists/games' }),
+  schema: z.object({
+    title: z.string(),
+    developers: z.array(z.object({
+      name: z.string(),
+      url: z.string().url(),
+    })),
+    releaseYear: z.number().int(),
+    rating: z.number().min(0).max(10).optional(),
+    status: z.string().optional(),
+    playthroughs: z.number().int().positive().optional(),
+    cover: z.string(),
+  }),
+});
+
+export const collections = { pages, notes, career, games };

@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import GameListItem from '../../components/GameListItem.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { formatGamesCount, getGamesPeriod, sortGamesByReleaseYear } from '../../lib/games';
+
+const games = sortGamesByReleaseYear(await getCollection('games'));
+const period = getGamesPeriod(games);
+---
+
+<PageLayout
+  title="Игры"
+  documentTitle="Игры Бориса Евдеева"
+  description="Список игр, которые я прошёл и оценил."
+  class="games-page"
+>
+  <p class="games-intro">Личный список игр, в которые я играл. Здесь нет обзоров и рейтингов индустрии — только мои собственные оценки и впечатления.</p>
+  <p class="games-count">{formatGamesCount(games.length)} <span aria-hidden="true">·</span> {period}</p>
+  <ol class="games-list">
+    {games.map((game) => <GameListItem game={game} />)}
+  </ol>
+</PageLayout>

@@ -14,8 +14,10 @@ import { lists } from '../lib/lists';
     <ul class="lists-list">
       {lists.map((list) => (
         <li>
-          <span class="list-name">{list.title}</span>
-          <span class="list-status">{list.status}</span>
+          {list.href
+            ? <a class="list-name" href={list.href}>{list.title}</a>
+            : <span class="list-name">{list.title}</span>}
+          {list.status && <span class="list-status">{list.status}</span>}
         </li>
       ))}
     </ul>
