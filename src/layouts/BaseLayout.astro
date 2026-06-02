@@ -7,10 +7,9 @@ import SiteHeader from '../components/SiteHeader.astro';
 interface Props {
   documentTitle: string;
   description: string;
-  showBackToTop?: boolean;
 }
 
-const { documentTitle, description, showBackToTop = false } = Astro.props;
+const { documentTitle, description } = Astro.props;
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
 ---
@@ -31,6 +30,6 @@ const displayDescription = typografText(description);
     <main>
       <slot />
     </main>
-    <SiteFooter showBackToTop={showBackToTop} />
+    <SiteFooter />
   </body>
 </html>

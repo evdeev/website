@@ -22,7 +22,7 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
 }).format(created);
 ---
 
-<BaseLayout documentTitle={title} description={description} showBackToTop>
+<BaseLayout documentTitle={title} description={description}>
   <article class="content note-content">
     <header class="note-header">
       <p class="note-date"><time datetime={created.toISOString()}>{formattedDate}</time></p>

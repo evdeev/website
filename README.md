@@ -25,14 +25,19 @@ npm run preview
 ```text
 src/
   components/
+    CareerTimelineItem.astro
+    HomeCareer.astro
     HomeNotes.astro
+    NoteListItem.astro
     SectionTitle.astro
     SiteFooter.astro
     SiteHeader.astro
   content/
     pages/
       home.md
-      career.md
+    career/
+      2024-alfa-bank.md
+      2020-sber-moscow.md
     notes/
       why-i-write/
         index.md
@@ -43,6 +48,7 @@ src/
     PageLayout.astro
     NoteLayout.astro
   lib/
+    career.ts
     lists.ts
     notes.ts
     typography.mjs
@@ -55,18 +61,19 @@ src/
       [slug].astro
 ```
 
-В `src/content.config.ts` определены две Astro Content Collections:
+В `src/content.config.ts` определены три Astro Content Collections:
 
 - `pages` для обычных страниц;
 - `notes` для заметок.
+- `career` для мест работы.
 
 Layouts выбираются программно в Astro-страницах, а не через frontmatter. Переиспользуемые
 блоки интерфейса находятся в `src/components/`.
 
 ## Страницы
 
-Главная страница редактируется в `src/content/pages/home.md`, раздел карьеры — в
-`src/content/pages/career.md`.
+Главная страница редактируется в `src/content/pages/home.md`. Раздел карьеры автоматически
+собирается из файлов `src/content/career/*.md`.
 
 Формат:
 
@@ -140,6 +147,32 @@ src/content/notes/my-note/
 Поле `created` хранит дату и время создания заметки с часовым поясом. Оно используется для
 хронологической сортировки, но на сайте отображается только дата. Необязательное поле
 `updated` можно добавить при изменении заметки; оно также хранит дату и время с часовым поясом.
+
+## Новая запись карьеры
+
+Каждое место работы хранится отдельным Markdown-файлом в `src/content/career/`. Страница
+`/career` автоматически сортирует записи от новых к старым. Главная страница показывает
+короткий тизер записи с `featured: true`.
+
+```md
+---
+title: Компания
+role: Должность
+start: 2024-03
+end: present
+summary: Короткое описание для превью.
+company_url: https://example.com
+location: Москва
+featured: true
+---
+
+## Чем занимался
+
+Подробности этапа карьеры.
+```
+
+Даты задаются в формате `YYYY` или `YYYY-MM`. Для текущего места работы используйте
+`end: present`. Поле `company_url` необязательно.
 
 ## Публикация на GitHub Pages
 

@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  career: CollectionEntry<'career'>;
+}
+
+const { career } = Astro.props;
+---
+
+<section class="home-career" aria-labelledby="home-career-title">
+  <h2 id="home-career-title">Карьера</h2>
+  <p class="home-career-current">Сейчас — {typografText(career.data.title)}.</p>
+  <p class="home-career-summary">{typografText(career.data.summary)}</p>
+  <a class="section-link" href="/career">Весь опыт →</a>
+</section>

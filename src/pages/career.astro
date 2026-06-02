@@ -1,16 +1,22 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import CareerTimelineItem from '../components/CareerTimelineItem.astro';
 import PageLayout from '../layouts/PageLayout.astro';
+import { sortCareerEntries } from '../lib/career';
 
-const page = await getEntry('pages', 'career');
-
-if (!page) {
-  throw new Error('Career page content is missing');
-}
-
-const { Content } = await render(page);
+const careerEntries = sortCareerEntries(await getCollection('career'));
+const timeline = await Promise.all(careerEntries.map(async (career) => ({
+  career,
+  Content: (await render(career)).Content,
+})));
 ---
 
-<PageLayout title={page.data.title} description={page.data.description}>
-  <Content />
+<PageLayout title="Карьера" description="Профессиональный опыт и проекты.">
+  <ol class="career-timeline">
+    {timeline.map(({ career, Content }) => (
+      <CareerTimelineItem career={career}>
+        <Content />
+      </CareerTimelineItem>
+    ))}
+  </ol>
 </PageLayout>
