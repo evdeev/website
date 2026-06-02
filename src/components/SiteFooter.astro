@@ -9,8 +9,12 @@ const { showBackToTop = false } = Astro.props;
 <footer class="site-footer">
   <address class="footer-contact">
     <strong>Борис Евдеев</strong>
-    <span>Нижний Новгород → Москва</span>
-    <a href="mailto:evdeev@gmail.com">evdeev@gmail.com</a>
+    <span class="footer-location">Нижний Новгород → Москва</span>
+    <span class="footer-links">
+      <a href="https://t.me/evdeev">Телеграм</a>
+      <span aria-hidden="true">·</span>
+      <a href="mailto:evdeev@gmail.com">Почта</a>
+    </span>
   </address>
   {showBackToTop && (
     <a
