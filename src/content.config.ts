@@ -35,6 +35,7 @@ const career = defineCollection({
     start: careerDate,
     end: z.union([careerDate, z.literal('present')]),
     summary: z.string(),
+    home_summary: z.string().optional(),
     company_url: z.string().url().optional(),
     location: z.string(),
     featured: z.boolean(),

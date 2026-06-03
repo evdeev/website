@@ -7,11 +7,12 @@ interface Props {
 }
 
 const { career } = Astro.props;
+const summary = career.data.home_summary ?? career.data.summary;
 ---
 
 <section class="home-career" aria-labelledby="home-career-title">
   <h2 id="home-career-title">Карьера</h2>
-  <p class="home-career-current">Сейчас — {typografText(career.data.title)}.</p>
-  <p class="home-career-summary">{typografText(career.data.summary)}</p>
+  <p class="home-career-current">Сейчас — {typografText(career.data.title)}</p>
+  <p class="home-career-summary">{typografText(summary)}</p>
   <a class="section-link" href="/career">Весь опыт →</a>
 </section>

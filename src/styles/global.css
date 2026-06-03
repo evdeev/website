@@ -478,8 +478,15 @@ blockquote p {
 
 .career-timeline {
   padding: 0;
-  margin: 36px 0 0;
+  margin: 48px 0 0;
   list-style: none;
+}
+
+.career-intro {
+  max-width: 60ch;
+  color: #3f3f3b;
+  font-size: clamp(1.04rem, 0.3vw + 1rem, 1.15rem);
+  line-height: 1.58;
 }
 
 .career-timeline-item {
@@ -492,11 +499,16 @@ blockquote p {
   padding-top: 1px;
 }
 
-.career-company {
+.career-company-line {
+  margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
-  font-weight: 600;
   line-height: 1.4;
+}
+
+.career-company {
+  color: var(--muted);
+  font-weight: 600;
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-decoration-thickness: 0.04em;
   text-underline-offset: 0.3em;
@@ -538,17 +550,12 @@ blockquote p {
   line-height: 1.3;
 }
 
-.career-location,
 .career-summary {
   max-width: 58ch;
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.career-summary {
+  margin: 12px 0 0;
   color: #4d4d48;
+  font-size: 0.96rem;
+  line-height: 1.58;
 }
 
 .career-official-role {
