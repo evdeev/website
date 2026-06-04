@@ -3,18 +3,22 @@ import { getCollection } from 'astro:content';
 import GameListItem from '../../components/GameListItem.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 import { formatGamesCount, getGamesPeriod, sortGamesByReleaseYear } from '../../lib/games';
+import { getPageContent } from '../../lib/pages';
 
+const { page, Content } = await getPageContent('games');
 const games = sortGamesByReleaseYear(await getCollection('games'));
 const period = getGamesPeriod(games);
 ---
 
 <PageLayout
-  title="Игры"
+  title={page.data.title}
   documentTitle="Игры Бориса Евдеева"
-  description="Список игр, которые я прошёл и оценил."
+  description={page.data.description}
   class="games-page"
 >
-  <p class="games-intro">Личный список игр, в которые я играл. Здесь нет обзоров и рейтингов индустрии — только мои собственные оценки и впечатления.</p>
+  <div class="games-intro">
+    <Content />
+  </div>
   <p class="games-count">{formatGamesCount(games.length)} <span aria-hidden="true">·</span> {period}</p>
   <ol class="games-list">
     {games.map((game) => <GameListItem game={game} />)}

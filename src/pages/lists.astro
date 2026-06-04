@@ -2,18 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { lists } from '../lib/lists';
+import { getPageContent } from '../lib/pages';
 
+const { page, Content } = await getPageContent('lists');
 const activeLists = lists.filter((list) => list.href);
 const upcomingLists = lists.filter((list) => !list.href);
 ---
 
 <BaseLayout
   documentTitle="Списки Бориса Евдеева"
-  description="Списки Бориса Евдеева: игры, фильмы и желания."
+  description={page.data.description}
 >
   <section class="content lists-page">
-    <SectionTitle title="Списки" />
-    <p class="lists-intro">Здесь будут списки книг, фильмов, игр и вещей, которые хочется сохранить.</p>
+    <SectionTitle title={page.data.title} />
+    <div class="lists-intro">
+      <Content />
+    </div>
     <ul class="lists-list">
       {activeLists.map((list) => (
         <li class="list-section-item">

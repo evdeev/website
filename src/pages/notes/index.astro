@@ -4,8 +4,10 @@ import NoteListItem from '../../components/NoteListItem.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortNotes } from '../../lib/notes';
+import { getPageContent } from '../../lib/pages';
 import { siteConfig } from '../../site.config';
 
+const { page, Content } = await getPageContent('notes');
 const notes = sortNotes(await getCollection('notes', ({ data }) => !data.draft));
 const { initialVisibleCount } = siteConfig.notes;
 const hasHiddenNotes = notes.length > initialVisibleCount;
@@ -13,10 +15,13 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
 
 <BaseLayout
   documentTitle="Заметки Бориса Евдеева"
-  description="Заметки Бориса Евдеева о продуктах, технологиях и личных проектах."
+  description={page.data.description}
 >
   <section class="content notes-page">
-    <SectionTitle title="Заметки" />
+    <SectionTitle title={page.data.title} />
+    <div class="notes-intro">
+      <Content />
+    </div>
     <ol class="note-listing-list notes-list">
       {notes.map((note, index) => (
         <NoteListItem note={note} headingLevel="h2" class={index >= initialVisibleCount ? 'is-hidden' : undefined} />

@@ -482,7 +482,8 @@ blockquote p {
   list-style: none;
 }
 
-.career-intro {
+.career-intro,
+.notes-intro {
   max-width: 60ch;
   color: #3f3f3b;
   font-size: clamp(1.04rem, 0.3vw + 1rem, 1.15rem);
@@ -595,7 +596,8 @@ blockquote p {
   list-style: none;
 }
 
-.lists-intro {
+.lists-intro,
+.games-intro {
   max-width: 58ch;
   color: #4d4d48;
   font-size: 0.98rem;
@@ -648,13 +650,6 @@ blockquote p {
 .is-upcoming .list-section-title,
 .is-upcoming .list-section-description {
   color: var(--muted);
-}
-
-.games-intro {
-  max-width: 58ch;
-  color: #4d4d48;
-  font-size: 0.98rem;
-  line-height: 1.5;
 }
 
 .games-count {
