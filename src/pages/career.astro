@@ -1,11 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import CareerTimelineItem from '../components/CareerTimelineItem.astro';
+import PageIntro from '../components/PageIntro.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { sortCareerEntries } from '../lib/career';
 import { getPageContent } from '../lib/pages';
 
-const { page, Content: PageContent } = await getPageContent('career');
+const { page, Content: PageContent, hasContent } = await getPageContent('career');
 const careerEntries = sortCareerEntries(await getCollection('career'));
 const timeline = await Promise.all(careerEntries.map(async (career) => ({
   career,
@@ -14,9 +15,12 @@ const timeline = await Promise.all(careerEntries.map(async (career) => ({
 ---
 
 <PageLayout title={page.data.title} description={page.data.description}>
-  <div class="career-intro">
-    <PageContent />
-  </div>
+  {page.data.intro && <PageIntro text={page.data.intro} />}
+  {hasContent && (
+    <div class="page-body">
+      <PageContent />
+    </div>
+  )}
   <ol class="career-timeline">
     {timeline.map(({ career, Content }) => (
       <CareerTimelineItem career={career}>

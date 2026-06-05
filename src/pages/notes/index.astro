@@ -1,13 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import NoteListItem from '../../components/NoteListItem.astro';
+import PageIntro from '../../components/PageIntro.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortNotes } from '../../lib/notes';
 import { getPageContent } from '../../lib/pages';
 import { siteConfig } from '../../site.config';
 
-const { page, Content } = await getPageContent('notes');
+const { page, Content, hasContent } = await getPageContent('notes');
 const notes = sortNotes(await getCollection('notes', ({ data }) => !data.draft));
 const { initialVisibleCount } = siteConfig.notes;
 const hasHiddenNotes = notes.length > initialVisibleCount;
@@ -19,9 +20,12 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
 >
   <section class="content notes-page">
     <SectionTitle title={page.data.title} />
-    <div class="notes-intro">
-      <Content />
-    </div>
+    {page.data.intro && <PageIntro text={page.data.intro} />}
+    {hasContent && (
+      <div class="page-body">
+        <Content />
+      </div>
+    )}
     <ol class="note-listing-list notes-list">
       {notes.map((note, index) => (
         <NoteListItem note={note} headingLevel="h2" class={index >= initialVisibleCount ? 'is-hidden' : undefined} />

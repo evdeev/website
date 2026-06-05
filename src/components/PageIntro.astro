@@ -1,0 +1,13 @@
+---
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  text?: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="page-intro">
+  {text ? <p>{typografText(text)}</p> : <slot />}
+</div>

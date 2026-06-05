@@ -1,0 +1,12 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="home-intro" aria-label={title}>
+  {title && <h1 class="visually-hidden">{title}</h1>}
+  <slot />
+</section>

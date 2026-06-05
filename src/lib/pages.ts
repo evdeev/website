@@ -8,6 +8,7 @@ export async function getPageContent(id: string) {
   }
 
   const { Content } = await render(page);
+  const hasContent = (page.body ?? '').trim().length > 0;
 
-  return { page, Content };
+  return { page, Content, hasContent };
 }

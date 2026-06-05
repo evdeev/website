@@ -260,11 +260,15 @@ blockquote p {
   font-size: 0.88rem;
 }
 
-.note-description {
-  margin-block: 0;
-  color: var(--muted);
-  font-size: clamp(1rem, 0.25vw + 0.96rem, 1.1rem);
-  line-height: 1.55;
+.article-lead {
+  max-width: 58ch;
+  color: #4d4d48;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.article-lead p {
+  margin: 0;
 }
 
 .note-content {
@@ -397,23 +401,24 @@ blockquote p {
 }
 
 .home-intro {
-  max-width: var(--text-width);
+  max-width: min(100%, 760px);
+  margin-bottom: clamp(64px, 8vw, 88px);
 }
 
 .home-intro > p {
-  font-size: clamp(1.08rem, 0.45vw + 1rem, 1.25rem);
-  line-height: 1.5;
+  max-width: 34em;
+  font-size: clamp(1.25rem, 0.45vw + 1.1rem, 1.375rem);
+  line-height: 1.65;
   letter-spacing: -0.01em;
 }
 
 .home-intro > p + p {
-  max-width: 58ch;
+  margin-top: 1.05em;
   color: #3f3f3b;
 }
 
 .home-career {
   max-width: var(--text-width);
-  margin-top: clamp(48px, 5vw, 56px);
 }
 
 .home-notes {
@@ -482,12 +487,38 @@ blockquote p {
   list-style: none;
 }
 
-.career-intro,
-.notes-intro {
-  max-width: 60ch;
+.page-intro {
+  max-width: 62ch;
+  margin: 0 0 clamp(36px, 4vw, 48px);
   color: #3f3f3b;
-  font-size: clamp(1.04rem, 0.3vw + 1rem, 1.15rem);
-  line-height: 1.58;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.page-intro p {
+  margin: 0;
+}
+
+.page-body {
+  max-width: 62ch;
+  margin: 0 0 clamp(40px, 5vw, 56px);
+  color: #3f3f3b;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.page-body p {
+  margin: 0;
+}
+
+.page-body p + p {
+  margin-top: 1.05em;
+}
+
+.page-intro + .note-listing-list,
+.page-intro + .lists-list,
+.page-intro + .games-count {
+  margin-top: 0;
 }
 
 .career-timeline-item {
@@ -594,14 +625,6 @@ blockquote p {
   padding: 0;
   margin: 28px 0 0;
   list-style: none;
-}
-
-.lists-intro,
-.games-intro {
-  max-width: 58ch;
-  color: #4d4d48;
-  font-size: 0.98rem;
-  line-height: 1.5;
 }
 
 .list-section-item + .list-section-item {
@@ -896,16 +919,12 @@ blockquote p {
   }
 
   .home-intro > p {
-    font-size: clamp(1.08rem, 0.45vw + 1rem, 1.25rem);
-    line-height: 1.5;
-  }
-
-  .home-notes {
-    margin-top: 48px;
+    font-size: clamp(1.12rem, 3.8vw, 1.25rem);
+    line-height: 1.6;
   }
 
   .home-career {
-    margin-top: 48px;
+    margin-top: 0;
   }
 
   .career-timeline-item {

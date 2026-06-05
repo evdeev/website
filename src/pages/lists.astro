@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { lists } from '../lib/lists';
 import { getPageContent } from '../lib/pages';
 
-const { page, Content } = await getPageContent('lists');
+const { page, Content, hasContent } = await getPageContent('lists');
 const activeLists = lists.filter((list) => list.href);
 const upcomingLists = lists.filter((list) => !list.href);
 ---
@@ -15,9 +16,12 @@ const upcomingLists = lists.filter((list) => !list.href);
 >
   <section class="content lists-page">
     <SectionTitle title={page.data.title} />
-    <div class="lists-intro">
-      <Content />
-    </div>
+    {page.data.intro && <PageIntro text={page.data.intro} />}
+    {hasContent && (
+      <div class="page-body">
+        <Content />
+      </div>
+    )}
     <ul class="lists-list">
       {activeLists.map((list) => (
         <li class="list-section-item">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ArticleLead from '../components/ArticleLead.astro';
 import type { CollectionEntry } from 'astro:content';
 import { typografText } from '../lib/typography.mjs';
 
@@ -14,7 +15,6 @@ interface Props {
 
 const { title, description, created, tags, nextNote, previousNote } = Astro.props;
 const displayTitle = typografText(title);
-const displayDescription = typografText(description);
 const formattedDate = new Intl.DateTimeFormat('ru-RU', {
   day: 'numeric',
   month: 'long',
@@ -27,7 +27,7 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
     <header class="note-header">
       <p class="note-date"><time datetime={created.toISOString()}>{formattedDate}</time></p>
       <h1>{displayTitle}</h1>
-      <p class="note-description">{displayDescription}</p>
+      <ArticleLead text={description} />
       {tags.length > 0 && <p class="note-tags">{tags.map((tag) => `#${tag}`).join(' ')}</p>}
     </header>
     <slot />

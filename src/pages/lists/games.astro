@@ -1,11 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import GameListItem from '../../components/GameListItem.astro';
+import PageIntro from '../../components/PageIntro.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 import { formatGamesCount, getGamesPeriod, sortGamesByReleaseYear } from '../../lib/games';
 import { getPageContent } from '../../lib/pages';
 
-const { page, Content } = await getPageContent('games');
+const { page, Content, hasContent } = await getPageContent('games');
 const games = sortGamesByReleaseYear(await getCollection('games'));
 const period = getGamesPeriod(games);
 ---
@@ -16,9 +17,12 @@ const period = getGamesPeriod(games);
   description={page.data.description}
   class="games-page"
 >
-  <div class="games-intro">
-    <Content />
-  </div>
+  {page.data.intro && <PageIntro text={page.data.intro} />}
+  {hasContent && (
+    <div class="page-body">
+      <Content />
+    </div>
+  )}
   <p class="games-count">{formatGamesCount(games.length)} <span aria-hidden="true">·</span> {period}</p>
   <ol class="games-list">
     {games.map((game) => <GameListItem game={game} />)}
