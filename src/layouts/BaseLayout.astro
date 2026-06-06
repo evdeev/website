@@ -14,6 +14,7 @@ interface Props {
 const { documentTitle, description, analyticsNoteSlug } = Astro.props;
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -22,6 +23,7 @@ const displayDescription = typografText(description);
     <meta charset="UTF-8" />
     <meta name="description" content={displayDescription} />
     <meta name="viewport" content="width=device-width" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <meta name="generator" content={Astro.generator} />
