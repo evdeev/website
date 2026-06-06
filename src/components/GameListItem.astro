@@ -26,7 +26,12 @@ const metadata = [
       {developers.map((developer, index) => (
         <>
           {index > 0 && ', '}
-          <a href={developer.url}>{developer.name}</a>
+          <a
+            href={developer.url}
+            data-analytics-event="external_link_click"
+            data-analytics-section="games"
+            data-analytics-content-type="developer"
+          >{developer.name}</a>
         </>
       ))}
       <span aria-hidden="true"> · </span>

@@ -1,0 +1,151 @@
+---
+interface Props {
+  noteSlug?: string;
+}
+
+const { noteSlug } = Astro.props;
+const counterId = import.meta.env.PUBLIC_YANDEX_METRIKA_ID;
+const hasCounter = typeof counterId === 'string' && counterId.trim().length > 0;
+---
+
+{hasCounter && (
+  <>
+    <script is:inline define:vars={{ counterId, noteSlug }}>
+      window.ym = window.ym || function () {
+        (window.ym.a = window.ym.a || []).push(arguments);
+      };
+      window.ym.l = 1 * new Date();
+
+      window.ym(counterId, 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        defer: true,
+      });
+
+      const baseParams = () => ({
+        page_path: window.location.pathname,
+        page_title: document.title,
+        section: '',
+        link_text: '',
+        target_url: '',
+        content_type: '',
+      });
+
+      const cleanParams = (params) => Object.fromEntries(
+        Object.entries(params).filter(([, value]) => value !== undefined && value !== null)
+      );
+
+      const sendAnalyticsEvent = (eventName, params = {}) => {
+        if (!window.ym || !counterId || !eventName) {
+          return;
+        }
+
+        window.ym(counterId, 'reachGoal', eventName, cleanParams({
+          ...baseParams(),
+          ...params,
+        }));
+      };
+
+      window.evdeevAnalytics = {
+        send: sendAnalyticsEvent,
+      };
+
+      const getLinkText = (link) => (link.dataset.analyticsLinkText || link.textContent || '').trim();
+      const getTargetUrl = (link) => link.dataset.analyticsTargetUrl || link.href || link.getAttribute('href');
+      const isExternalLink = (link) => {
+        const href = link.getAttribute('href');
+
+        if (!href || href.startsWith('#') || href.startsWith('/') || href.startsWith('mailto:')) {
+          return false;
+        }
+
+        try {
+          return new URL(href, window.location.href).origin !== window.location.origin;
+        } catch {
+          return false;
+        }
+      };
+
+      document.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+
+        if (!link) {
+          return;
+        }
+
+        const eventName = link.dataset.analyticsEvent || (isExternalLink(link) ? 'external_link_click' : undefined);
+
+        if (!eventName) {
+          return;
+        }
+
+        sendAnalyticsEvent(eventName, {
+          section: link.dataset.analyticsSection,
+          link_text: getLinkText(link),
+          target_url: getTargetUrl(link),
+          content_type: link.dataset.analyticsContentType,
+          note_slug: link.dataset.analyticsNoteSlug,
+        });
+      });
+
+      if (noteSlug) {
+        const article = document.querySelector('.note-content');
+        const sentDepths = new Set();
+        const depthEvents = [
+          { threshold: 0.5, name: 'note_read_50' },
+          { threshold: 0.9, name: 'note_read_90' },
+          { threshold: 1, name: 'note_read_complete' },
+        ];
+
+        const getArticleProgress = () => {
+          if (!article) {
+            return 0;
+          }
+
+          const rect = article.getBoundingClientRect();
+          const articleTop = rect.top + window.scrollY;
+          const articleHeight = article.offsetHeight;
+          const viewportBottom = window.scrollY + window.innerHeight;
+
+          if (articleHeight <= 0) {
+            return 0;
+          }
+
+          return Math.min(1, Math.max(0, (viewportBottom - articleTop) / articleHeight));
+        };
+
+        const trackReadingDepth = () => {
+          const progress = getArticleProgress();
+
+          for (const depth of depthEvents) {
+            if (progress >= depth.threshold && !sentDepths.has(depth.name)) {
+              sentDepths.add(depth.name);
+              sendAnalyticsEvent(depth.name, {
+                section: 'note',
+                content_type: 'note',
+                note_slug: noteSlug,
+              });
+            }
+          }
+
+          if (sentDepths.size === depthEvents.length) {
+            window.removeEventListener('scroll', trackReadingDepth);
+            window.removeEventListener('resize', trackReadingDepth);
+          }
+        };
+
+        window.addEventListener('scroll', trackReadingDepth, { passive: true });
+        window.addEventListener('resize', trackReadingDepth);
+        trackReadingDepth();
+      }
+    </script>
+    <script is:inline src="https://mc.yandex.ru/metrika/tag.js"></script>
+    <noscript>
+      <div>
+        <img src={`https://mc.yandex.ru/watch/${counterId}`} style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
+  </>
+)}

@@ -15,7 +15,15 @@ const companyTitle = typografText(career.data.title);
   <div class="career-timeline-meta">
     <p class="career-company-line">
       {career.data.company_url
-        ? <a class="career-company" href={career.data.company_url}>{companyTitle}</a>
+        ? (
+          <a
+            class="career-company"
+            href={career.data.company_url}
+            data-analytics-event="career_click"
+            data-analytics-section="career"
+            data-analytics-content-type="company"
+          >{companyTitle}</a>
+        )
         : <span class="career-company">{companyTitle}</span>}, {typografText(career.data.location)}
     </p>
     <p class="career-period">{formatCareerPeriod(career.data.start, career.data.end)}</p>

@@ -25,7 +25,14 @@ const upcomingLists = lists.filter((list) => !list.href);
     <ul class="lists-list">
       {activeLists.map((list) => (
         <li class="list-section-item">
-          <h2 class="list-section-title"><a href={list.href}>{list.title}</a></h2>
+          <h2 class="list-section-title">
+            <a
+              href={list.href}
+              data-analytics-event="list_click"
+              data-analytics-section="lists"
+              data-analytics-content-type="list"
+            >{list.title}</a>
+          </h2>
           <p class="list-section-description">{list.description}</p>
         </li>
       ))}

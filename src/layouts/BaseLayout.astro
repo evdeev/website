@@ -3,13 +3,15 @@ import globalStyles from '../styles/global.css?raw';
 import { typografText } from '../lib/typography.mjs';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import YandexMetrika from '../components/YandexMetrika.astro';
 
 interface Props {
   documentTitle: string;
   description: string;
+  analyticsNoteSlug?: string;
 }
 
-const { documentTitle, description } = Astro.props;
+const { documentTitle, description, analyticsNoteSlug } = Astro.props;
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
 ---
@@ -32,5 +34,6 @@ const displayDescription = typografText(description);
       <slot />
     </main>
     <SiteFooter />
+    <YandexMetrika noteSlug={analyticsNoteSlug} />
   </body>
 </html>

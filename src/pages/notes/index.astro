@@ -28,7 +28,12 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
     )}
     <ol class="note-listing-list notes-list">
       {notes.map((note, index) => (
-        <NoteListItem note={note} headingLevel="h2" class={index >= initialVisibleCount ? 'is-hidden' : undefined} />
+        <NoteListItem
+          note={note}
+          headingLevel="h2"
+          analyticsSection="notes"
+          class={index >= initialVisibleCount ? 'is-hidden' : undefined}
+        />
       ))}
     </ol>
     {hasHiddenNotes && <button class="show-more-notes" type="button">Показать ещё ↓</button>}

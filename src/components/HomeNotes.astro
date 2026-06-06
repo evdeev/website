@@ -13,8 +13,14 @@ const { notes } = Astro.props;
   <h2 id="home-notes-title">Заметки</h2>
   <ol class="note-listing-list">
     {notes.map((note) => (
-      <NoteListItem note={note} headingLevel="h3" />
+      <NoteListItem note={note} headingLevel="h3" analyticsSection="home_notes" />
     ))}
   </ol>
-  <a class="all-notes-link" href="/notes">Все заметки →</a>
+  <a
+    class="all-notes-link"
+    href="/notes"
+    data-analytics-event="nav_click"
+    data-analytics-section="home_notes"
+    data-analytics-content-type="navigation"
+  >Все заметки →</a>
 </section>

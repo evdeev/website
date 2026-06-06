@@ -6,14 +6,24 @@ import { typografText } from '../lib/typography.mjs';
 interface Props {
   note: CollectionEntry<'notes'>;
   headingLevel: 'h2' | 'h3';
+  analyticsSection?: 'home_notes' | 'notes';
   class?: string;
 }
 
-const { note, headingLevel: Heading, class: className } = Astro.props;
+const { note, headingLevel: Heading, analyticsSection = 'notes', class: className } = Astro.props;
+const analyticsEvent = analyticsSection === 'home_notes' ? 'home_note_click' : 'notes_note_click';
 ---
 
 <li class:list={['note-listing-item', className]}>
-  <Heading><a href={`/notes/${note.data.slug}`}>{typografText(note.data.title)}</a></Heading>
+  <Heading>
+    <a
+      href={`/notes/${note.data.slug}`}
+      data-analytics-event={analyticsEvent}
+      data-analytics-section={analyticsSection}
+      data-analytics-content-type="note"
+      data-analytics-note-slug={note.data.slug}
+    >{typografText(note.data.title)}</a>
+  </Heading>
   <p class="note-listing-description">{typografText(note.data.description)}</p>
   <p class="note-listing-date">
     <time datetime={note.data.created.toISOString()}>{formatNoteDate(note.data.created)}</time>

@@ -14,5 +14,11 @@ const summary = career.data.home_summary ?? career.data.summary;
   <h2 id="home-career-title">Карьера</h2>
   <p class="home-career-current">Сейчас — {typografText(career.data.title)}</p>
   <p class="home-career-summary">{typografText(summary)}</p>
-  <a class="section-link" href="/career">Весь опыт →</a>
+  <a
+    class="section-link"
+    href="/career"
+    data-analytics-event="career_click"
+    data-analytics-section="home_career"
+    data-analytics-content-type="career"
+  >Весь опыт →</a>
 </section>

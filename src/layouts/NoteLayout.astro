@@ -15,6 +15,7 @@ interface Props {
 
 const { title, description, created, tags, nextNote, previousNote } = Astro.props;
 const displayTitle = typografText(title);
+const noteSlug = Astro.url.pathname.replace(/^\/notes\//, '').replace(/\/$/, '');
 const formattedDate = new Intl.DateTimeFormat('ru-RU', {
   day: 'numeric',
   month: 'long',
@@ -22,7 +23,7 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
 }).format(created);
 ---
 
-<BaseLayout documentTitle={title} description={description}>
+<BaseLayout documentTitle={title} description={description} analyticsNoteSlug={noteSlug}>
   <article class="content note-content">
     <header class="note-header">
       <p class="note-date"><time datetime={created.toISOString()}>{formattedDate}</time></p>
@@ -34,19 +35,39 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
     <footer class="note-navigation">
       <nav class="note-neighbors" aria-label="Соседние заметки">
         {previousNote && (
-          <a class="note-neighbor-link previous-note" href={`/notes/${previousNote.data.slug}`}>
+          <a
+            class="note-neighbor-link previous-note"
+            href={`/notes/${previousNote.data.slug}`}
+            data-analytics-event="notes_note_click"
+            data-analytics-section="note_navigation"
+            data-analytics-content-type="note"
+            data-analytics-note-slug={previousNote.data.slug}
+          >
             <span class="note-neighbor-label">← Предыдущая заметка</span>
             <span class="note-neighbor-title">{typografText(previousNote.data.title)}</span>
           </a>
         )}
         {nextNote && (
-          <a class="note-neighbor-link next-note" href={`/notes/${nextNote.data.slug}`}>
+          <a
+            class="note-neighbor-link next-note"
+            href={`/notes/${nextNote.data.slug}`}
+            data-analytics-event="notes_note_click"
+            data-analytics-section="note_navigation"
+            data-analytics-content-type="note"
+            data-analytics-note-slug={nextNote.data.slug}
+          >
             <span class="note-neighbor-label">Следующая заметка →</span>
             <span class="note-neighbor-title">{typografText(nextNote.data.title)}</span>
           </a>
         )}
       </nav>
-      <a class="section-link all-notes-link" href="/notes">Все заметки</a>
+      <a
+        class="section-link all-notes-link"
+        href="/notes"
+        data-analytics-event="nav_click"
+        data-analytics-section="note_navigation"
+        data-analytics-content-type="navigation"
+      >Все заметки</a>
     </footer>
   </article>
 </BaseLayout>
