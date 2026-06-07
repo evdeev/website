@@ -9,9 +9,10 @@ interface Props {
   documentTitle: string;
   description: string;
   analyticsNoteSlug?: string;
+  noindex?: boolean;
 }
 
-const { documentTitle, description, analyticsNoteSlug } = Astro.props;
+const { documentTitle, description, analyticsNoteSlug, noindex = false } = Astro.props;
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -22,6 +23,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={displayDescription} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="viewport" content="width=device-width" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

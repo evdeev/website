@@ -9,13 +9,21 @@ interface Props {
   documentTitle?: string;
   showTitle?: boolean;
   class?: string;
+  noindex?: boolean;
 }
 
-const { title, description, documentTitle = `${title} Бориса Евдеева`, showTitle = true, class: className } = Astro.props;
+const {
+  title,
+  description,
+  documentTitle = `${title} Бориса Евдеева`,
+  showTitle = true,
+  class: className,
+  noindex = false,
+} = Astro.props;
 const displayTitle = typografText(title);
 ---
 
-<BaseLayout documentTitle={documentTitle} description={description}>
+<BaseLayout documentTitle={documentTitle} description={description} noindex={noindex}>
   <article class:list={['content', 'page-content', className]}>
     {showTitle && <SectionTitle title={displayTitle} />}
     <slot />

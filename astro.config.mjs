@@ -30,7 +30,12 @@ function cleanSitemapFilename() {
 
 export default defineConfig({
   site: 'https://evdeev.ru',
-  integrations: [sitemap(), cleanSitemapFilename()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith('/manifesto') && !page.endsWith('/manifesto/'),
+    }),
+    cleanSitemapFilename(),
+  ],
   markdown: {
     processor: unified({
       rehypePlugins: [rehypeRussianTypography],
