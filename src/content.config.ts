@@ -17,6 +17,7 @@ const notes = defineCollection({
     title: z.string(),
     slug: z.string(),
     description: z.string(),
+    intro: z.string().optional(),
     created: z.coerce.date(),
     updated: z.coerce.date().optional(),
     draft: z.boolean(),

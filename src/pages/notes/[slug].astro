@@ -29,6 +29,7 @@ const { Content } = await render(note);
 <NoteLayout
   title={note.data.title}
   description={note.data.description}
+  intro={note.data.intro}
   created={note.data.created}
   tags={note.data.tags}
   nextNote={nextNote}

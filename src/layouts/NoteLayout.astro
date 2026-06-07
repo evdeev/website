@@ -7,13 +7,14 @@ import { typografText } from '../lib/typography.mjs';
 interface Props {
   title: string;
   description: string;
+  intro?: string;
   created: Date;
   tags: string[];
   nextNote?: CollectionEntry<'notes'>;
   previousNote?: CollectionEntry<'notes'>;
 }
 
-const { title, description, created, tags, nextNote, previousNote } = Astro.props;
+const { title, description, intro, created, tags, nextNote, previousNote } = Astro.props;
 const displayTitle = typografText(title);
 const noteSlug = Astro.url.pathname.replace(/^\/notes\//, '').replace(/\/$/, '');
 const formattedDate = new Intl.DateTimeFormat('ru-RU', {
@@ -28,7 +29,7 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
     <header class="note-header">
       <p class="note-date"><time datetime={created.toISOString()}>{formattedDate}</time></p>
       <h1>{displayTitle}</h1>
-      <ArticleLead text={description} />
+      <ArticleLead text={intro ?? description} />
       {tags.length > 0 && <p class="note-tags">{tags.map((tag) => `#${tag}`).join(' ')}</p>}
     </header>
     <slot />
