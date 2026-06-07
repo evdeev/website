@@ -30,6 +30,9 @@ function cleanSitemapFilename() {
 
 export default defineConfig({
   site: 'https://evdeev.ru',
+  redirects: {
+    '/notes/why-i-write/': '/notes/write-to-save-conclusions/',
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith('/manifesto') && !page.endsWith('/manifesto/'),

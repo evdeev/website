@@ -10,8 +10,8 @@ export async function getStaticPaths() {
     params: { slug: note.data.slug },
     props: {
       note,
-      nextNote: notes[index - 1],
-      previousNote: notes[index + 1],
+      previousNote: notes[index - 1],
+      nextNote: notes[index + 1],
     },
   }));
 }
