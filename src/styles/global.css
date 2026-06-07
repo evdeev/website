@@ -829,9 +829,9 @@ blockquote p {
 
 .site-footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 26px;
   padding-block: 0 34px;
   margin-top: clamp(76px, 12vw, 144px);
   color: var(--text);
@@ -856,7 +856,6 @@ blockquote p {
 
 .footer-links {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.45em;
   margin-top: 10px;
 }
@@ -865,7 +864,14 @@ blockquote p {
   color: var(--muted);
 }
 
-.footer-contact a {
+.footer-bottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-footer a {
   color: var(--text);
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-decoration-thickness: 0.04em;
@@ -874,20 +880,17 @@ blockquote p {
   white-space: nowrap;
 }
 
-.footer-contact a:hover {
+.site-footer a:hover {
   color: var(--text);
   text-decoration-color: currentColor;
 }
 
 .back-to-top {
-  color: var(--text);
   text-decoration: none;
   flex-shrink: 0;
-  white-space: nowrap;
 }
 
 .back-to-top:hover {
-  color: var(--text);
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-decoration-thickness: 0.04em;
@@ -911,21 +914,13 @@ blockquote p {
   }
 
   .site-footer {
-    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer-bottom {
     column-gap: 18px;
-    row-gap: 14px;
-  }
-
-  .footer-contact {
-    min-width: min(100%, 230px);
-  }
-
-  .footer-policy-separator {
-    display: none;
-  }
-
-  .footer-policy-link {
-    flex-basis: 100%;
+    row-gap: 6px;
+    flex-wrap: wrap;
   }
 
   .site-name {
