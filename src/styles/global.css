@@ -856,11 +856,12 @@ blockquote p {
 
 .footer-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.45em;
   margin-top: 10px;
 }
 
-.footer-links > span {
+.footer-separator {
   color: var(--muted);
 }
 
@@ -870,6 +871,7 @@ blockquote p {
   text-decoration-thickness: 0.04em;
   text-underline-offset: 0.4em;
   transition: text-decoration-color 160ms ease;
+  white-space: nowrap;
 }
 
 .footer-contact a:hover {
@@ -880,6 +882,8 @@ blockquote p {
 .back-to-top {
   color: var(--text);
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .back-to-top:hover {
@@ -904,6 +908,24 @@ blockquote p {
 
   .site-nav {
     gap: 6px;
+  }
+
+  .site-footer {
+    align-items: flex-start;
+    column-gap: 18px;
+    row-gap: 14px;
+  }
+
+  .footer-contact {
+    min-width: min(100%, 230px);
+  }
+
+  .footer-policy-separator {
+    display: none;
+  }
+
+  .footer-policy-link {
+    flex-basis: 100%;
   }
 
   .site-name {

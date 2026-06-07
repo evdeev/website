@@ -2,6 +2,26 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const moscowDateTime = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
+
+const noteDate = z.string().transform((value, context) => {
+  const normalizedValue = moscowDateTime.test(value)
+    ? `${value.replace(' ', 'T')}+03:00`
+    : value;
+  const date = new Date(normalizedValue);
+
+  if (Number.isNaN(date.valueOf())) {
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Use YYYY-MM-DD HH:mm:ss for Moscow time',
+    });
+
+    return z.NEVER;
+  }
+
+  return date;
+});
+
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
   schema: z.object({
@@ -20,8 +40,8 @@ const notes = defineCollection({
     status: z.enum(['draft', 'published']).optional(),
     description: z.string(),
     intro: z.string().optional(),
-    created: z.coerce.date(),
-    updated: z.coerce.date().optional(),
+    created: noteDate,
+    updated: noteDate.optional(),
     draft: z.boolean(),
     tags: z.array(z.string()),
     cover: z.string().optional(),
