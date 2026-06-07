@@ -890,11 +890,10 @@ blockquote p {
   flex-shrink: 0;
 }
 
-.back-to-top:hover {
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
-  text-decoration-thickness: 0.04em;
-  text-underline-offset: 0.4em;
+.back-to-top:hover,
+.back-to-top:focus-visible,
+.back-to-top:active {
+  text-decoration: none;
 }
 
 @media (max-width: 560px) {
