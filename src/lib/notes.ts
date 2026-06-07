@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 type Note = CollectionEntry<'notes'>;
 
 export function sortNotes(notes: Note[]) {
-  return notes.sort((a, b) => a.data.created.valueOf() - b.data.created.valueOf());
+  return notes.sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf());
 }
 
 export function formatNoteDate(date: Date) {
