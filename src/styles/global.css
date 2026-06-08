@@ -468,7 +468,8 @@ blockquote p {
   text-decoration-color: currentColor;
 }
 
-.section-link {
+.section-link,
+.home-notes .all-notes-link {
   display: inline-block;
   margin-top: 18px;
 }
