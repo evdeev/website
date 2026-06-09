@@ -762,17 +762,23 @@ blockquote p {
 .show-more-notes {
   padding: 0;
   margin-top: 26px;
-  color: var(--link);
+  color: var(--text);
   background: none;
   border: 0;
   cursor: pointer;
   font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.5;
   text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.4em;
+  transition: text-decoration-color 160ms ease;
 }
 
 .show-more-notes:hover {
-  color: var(--link-hover);
+  color: var(--text);
+  text-decoration-color: currentColor;
 }
 
 .note-navigation {
