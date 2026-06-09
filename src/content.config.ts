@@ -48,6 +48,14 @@ const notes = defineCollection({
   }),
 });
 
+const series = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/content/series' }),
+  schema: z.object({
+    title: z.string(),
+    notes: z.array(z.string()).min(1),
+  }),
+});
+
 const careerDate = z.string().regex(/^\d{4}(-\d{2})?$/, 'Use YYYY or YYYY-MM format');
 
 const career = defineCollection({
@@ -82,4 +90,4 @@ const games = defineCollection({
   }),
 });
 
-export const collections = { pages, notes, career, games };
+export const collections = { pages, notes, series, career, games };

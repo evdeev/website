@@ -1,0 +1,57 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { typografText } from '../lib/typography.mjs';
+
+interface Props {
+  currentNote: CollectionEntry<'notes'>;
+}
+
+const { currentNote } = Astro.props;
+const currentSlug = currentNote.data.slug;
+const series = await getCollection('series');
+const relatedSeries = series.find((item) => item.data.notes.includes(currentSlug));
+
+const notes = await getCollection('notes', ({ data }) => !data.draft);
+const notesBySlug = new Map(notes.map((note) => [note.data.slug, note]));
+const relatedNotes = relatedSeries
+  ? relatedSeries.data.notes.map((slug) => {
+      const note = notesBySlug.get(slug);
+
+      if (!note) {
+        throw new Error(`Series "${relatedSeries.id}" references unknown or draft note "${slug}".`);
+      }
+
+      return note;
+    })
+  : [];
+---
+
+{relatedSeries && (
+  <section class="related-notes" aria-labelledby="related-notes-title">
+    <h2 id="related-notes-title">Связанные заметки</h2>
+    <ol class="related-notes-list">
+      {relatedNotes.map((note) => {
+        const isCurrent = note.data.slug === currentSlug;
+        const title = typografText(note.data.title);
+
+        return (
+          <li class:list={[{ 'is-current': isCurrent }]}>
+            {isCurrent ? (
+              <span aria-current="page">{title}</span>
+            ) : (
+              <a
+                href={`/notes/${note.data.slug}`}
+                data-analytics-event="notes_note_click"
+                data-analytics-section="related_notes"
+                data-analytics-content-type="note"
+                data-analytics-note-slug={note.data.slug}
+              >
+                {title}
+              </a>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+)}
