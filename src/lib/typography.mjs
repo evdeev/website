@@ -36,6 +36,7 @@ const boundWords = [
   'со',
   'у',
   'что',
+  'чем',
 ];
 
 const boundWordPattern = new RegExp(

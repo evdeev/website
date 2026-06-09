@@ -7,8 +7,10 @@ const nbsp = '\u00a0';
 
 test('binds Russian short words to the following word', () => {
   assert.equal(
-    typografText('до дома про сайт по плану но без спешки с другом у дома к вечеру и как получится'),
-    `до${nbsp}дома про${nbsp}сайт по${nbsp}плану, но${nbsp}без${nbsp}спешки с${nbsp}другом у${nbsp}дома к${nbsp}вечеру и${nbsp}как${nbsp}получится`,
+    typografText(
+      'до дома про сайт по плану но без спешки с другом у дома к вечеру и как получится чем кажется',
+    ),
+    `до${nbsp}дома про${nbsp}сайт по${nbsp}плану, но${nbsp}без${nbsp}спешки с${nbsp}другом у${nbsp}дома к${nbsp}вечеру и${nbsp}как${nbsp}получится чем${nbsp}кажется`,
   );
 });
 
