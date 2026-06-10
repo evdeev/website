@@ -16,10 +16,11 @@ const { documentTitle, description, analyticsNoteSlug, noindex = false } = Astro
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const editorialTypographyEnabled = import.meta.env.PUBLIC_EDITORIAL_TYPOGRAPHY !== 'off';
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class:list={{ 'typography-editorial': editorialTypographyEnabled }}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={displayDescription} />
@@ -31,6 +32,27 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="alternate icon" href="/favicon-20260610.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-20260610.png" />
     <meta name="generator" content={Astro.generator} />
+    {editorialTypographyEnabled && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Manrope:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </>
+    )}
+    <script is:inline>
+      (() => {
+        const typography = new URLSearchParams(window.location.search).get('typography');
+        if (typography === 'legacy') {
+          document.documentElement.classList.remove('typography-editorial');
+        }
+        if (typography === 'editorial') {
+          document.documentElement.classList.add('typography-editorial');
+        }
+      })();
+    </script>
     <title>{displayTitle}</title>
     <style is:inline set:html={globalStyles}></style>
   </head>
