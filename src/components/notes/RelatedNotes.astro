@@ -1,6 +1,7 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { typografText } from '../lib/typography.mjs';
+import type { CollectionEntry } from 'astro:content';
+import { getRelatedNotes } from '../../lib/relations';
+import { typografText } from '../../lib/typography.mjs';
 
 interface Props {
   currentNote: CollectionEntry<'notes'>;
@@ -8,25 +9,10 @@ interface Props {
 
 const { currentNote } = Astro.props;
 const currentSlug = currentNote.data.slug;
-const series = await getCollection('series');
-const relatedSeries = series.find((item) => item.data.notes.includes(currentSlug));
-
-const notes = await getCollection('notes', ({ data }) => !data.draft);
-const notesBySlug = new Map(notes.map((note) => [note.data.slug, note]));
-const relatedNotes = relatedSeries
-  ? relatedSeries.data.notes.map((slug) => {
-      const note = notesBySlug.get(slug);
-
-      if (!note) {
-        throw new Error(`Series "${relatedSeries.id}" references unknown or draft note "${slug}".`);
-      }
-
-      return note;
-    })
-  : [];
+const relatedNotes = await getRelatedNotes(currentNote);
 ---
 
-{relatedSeries && (
+{relatedNotes.length > 0 && (
   <section class="related-notes" aria-labelledby="related-notes-title">
     <h2 id="related-notes-title">Связанные заметки</h2>
     <ol class="related-notes-list">

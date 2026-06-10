@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
-import CareerTimelineItem from '../components/CareerTimelineItem.astro';
-import PageIntro from '../components/PageIntro.astro';
+import CareerItem from '../components/career/CareerItem.astro';
+import CareerTimeline from '../components/career/CareerTimeline.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { sortCareerEntries } from '../lib/career';
 import { getPageContent } from '../lib/pages';
@@ -14,18 +14,17 @@ const timeline = await Promise.all(careerEntries.map(async (career) => ({
 })));
 ---
 
-<PageLayout title={page.data.title} description={page.data.description} class="career-page">
-  {page.data.intro && <PageIntro text={page.data.intro} />}
+<PageLayout title={page.data.title} description={page.data.description} intro={page.data.intro} class="career-page">
   {hasContent && (
     <div class="page-body">
       <PageContent />
     </div>
   )}
-  <ol class="career-timeline">
+  <CareerTimeline>
     {timeline.map(({ career, Content }) => (
-      <CareerTimelineItem career={career}>
+      <CareerItem career={career}>
         <Content />
-      </CareerTimelineItem>
+      </CareerItem>
     ))}
-  </ol>
+  </CareerTimeline>
 </PageLayout>

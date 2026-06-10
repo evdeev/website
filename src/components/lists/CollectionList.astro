@@ -1,0 +1,18 @@
+---
+import CollectionCard from './CollectionCard.astro';
+import type { Collection } from '../../lib/domain';
+
+interface Props {
+  collections: Collection[];
+  headingLevel?: 'h2' | 'h3';
+  upcoming?: boolean;
+}
+
+const { collections, headingLevel = 'h2', upcoming = false } = Astro.props;
+---
+
+<ul class="lists-list">
+  {collections.map((collection) => (
+    <CollectionCard collection={collection} headingLevel={headingLevel} upcoming={upcoming} />
+  ))}
+</ul>

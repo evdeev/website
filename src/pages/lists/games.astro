@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import GameListItem from '../../components/GameListItem.astro';
-import PageIntro from '../../components/PageIntro.astro';
+import GameItem from '../../components/lists/GameItem.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 import { formatGamesCount, getGamesPeriod, sortGamesByReleaseYear } from '../../lib/games';
 import { getPageContent } from '../../lib/pages';
@@ -15,9 +14,9 @@ const period = getGamesPeriod(games);
   title={page.data.title}
   documentTitle="Игры Бориса Евдеева"
   description={page.data.description}
+  intro={page.data.intro}
   class="games-page"
 >
-  {page.data.intro && <PageIntro text={page.data.intro} />}
   {hasContent && (
     <div class="page-body">
       <Content />
@@ -25,6 +24,6 @@ const period = getGamesPeriod(games);
   )}
   <p class="games-count">{formatGamesCount(games.length)} <span aria-hidden="true">·</span> {period}</p>
   <ol class="games-list">
-    {games.map((game) => <GameListItem game={game} />)}
+    {games.map((game) => <GameItem game={game} />)}
   </ol>
 </PageLayout>

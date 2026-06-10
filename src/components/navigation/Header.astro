@@ -1,4 +1,6 @@
 ---
+import { author } from '../../lib/author';
+
 const { pathname } = Astro.url;
 const isNotes = pathname === '/notes' || pathname.startsWith('/notes/');
 const isCareer = pathname === '/career' || pathname === '/career/';
@@ -13,7 +15,7 @@ const isLists = pathname === '/lists' || pathname.startsWith('/lists/');
       data-analytics-event="nav_click"
       data-analytics-section="header"
       data-analytics-content-type="navigation"
-    >Борис Евдеев</a>
+    >{author.name}</a>
     <div class="site-links">
       <a
         class:list={{ 'is-active': isNotes }}

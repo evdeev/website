@@ -1,20 +1,27 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatNoteDate } from '../lib/notes';
-import { typografText } from '../lib/typography.mjs';
+import { formatNoteDate } from '../../lib/notes';
+import { typografText } from '../../lib/typography.mjs';
 
 interface Props {
   note: CollectionEntry<'notes'>;
   headingLevel: 'h2' | 'h3';
+  variant?: 'compact' | 'default';
   analyticsSection?: 'home_notes' | 'notes';
   class?: string;
 }
 
-const { note, headingLevel: Heading, analyticsSection = 'notes', class: className } = Astro.props;
+const {
+  note,
+  headingLevel: Heading,
+  variant = 'default',
+  analyticsSection = 'notes',
+  class: className,
+} = Astro.props;
 const analyticsEvent = analyticsSection === 'home_notes' ? 'home_note_click' : 'notes_note_click';
 ---
 
-<li class:list={['note-listing-item', className]}>
+<li class:list={['note-listing-item', `note-card--${variant}`, className]}>
   <Heading>
     <a
       href={`/notes/${note.data.slug}`}

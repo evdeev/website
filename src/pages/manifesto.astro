@@ -1,5 +1,4 @@
 ---
-import PageIntro from '../components/PageIntro.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { getPageContent } from '../lib/pages';
 
@@ -10,10 +9,10 @@ const { page, Content } = await getPageContent('manifesto');
   title={page.data.title}
   documentTitle={`${page.data.title} Бориса Евдеева`}
   description={page.data.description}
+  intro={page.data.intro}
   class="manifesto-page"
   noindex
 >
-  {page.data.intro && <PageIntro text={page.data.intro} />}
   <div class="page-body">
     <Content />
   </div>

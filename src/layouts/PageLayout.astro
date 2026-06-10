@@ -1,12 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import SectionTitle from '../components/SectionTitle.astro';
-import { typografText } from '../lib/typography.mjs';
+import PageIntro from '../components/intro/PageIntro.astro';
 
 interface Props {
   title: string;
   description: string;
   documentTitle?: string;
+  intro?: string;
   showTitle?: boolean;
   class?: string;
   noindex?: boolean;
@@ -16,16 +16,16 @@ const {
   title,
   description,
   documentTitle = `${title} Бориса Евдеева`,
+  intro,
   showTitle = true,
   class: className,
   noindex = false,
 } = Astro.props;
-const displayTitle = typografText(title);
 ---
 
 <BaseLayout documentTitle={documentTitle} description={description} noindex={noindex}>
   <article class:list={['content', 'page-content', className]}>
-    {showTitle && <SectionTitle title={displayTitle} />}
+    {showTitle && <PageIntro title={title} description={intro} />}
     <slot />
   </article>
 </BaseLayout>

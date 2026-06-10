@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import NoteListItem from '../../components/NoteListItem.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import SectionTitle from '../../components/SectionTitle.astro';
+import PageIntro from '../../components/intro/PageIntro.astro';
+import NoteCard from '../../components/notes/NoteCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortNotes } from '../../lib/notes';
 import { getPageContent } from '../../lib/pages';
@@ -19,8 +18,7 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
   description={page.data.description}
 >
   <section class="content notes-page">
-    <SectionTitle title={page.data.title} />
-    {page.data.intro && <PageIntro text={page.data.intro} />}
+    <PageIntro title={page.data.title} description={page.data.intro} />
     {hasContent && (
       <div class="page-body">
         <Content />
@@ -28,7 +26,7 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
     )}
     <ol class="note-listing-list notes-list">
       {notes.map((note, index) => (
-        <NoteListItem
+        <NoteCard
           note={note}
           headingLevel="h2"
           analyticsSection="notes"

@@ -45,6 +45,10 @@ const notes = defineCollection({
     draft: z.boolean(),
     tags: z.array(z.string()),
     cover: z.string().optional(),
+    relatedNotes: z.array(z.string()).optional(),
+    relatedCareer: z.array(z.string()).optional(),
+    relatedProjects: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
   }),
 });
 
@@ -71,6 +75,7 @@ const career = defineCollection({
     company_url: z.string().url().optional(),
     location: z.string(),
     featured: z.boolean(),
+    relatedNotes: z.array(z.string()).optional(),
   }),
 });
 

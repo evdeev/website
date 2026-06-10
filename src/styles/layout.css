@@ -1,0 +1,45 @@
+.site-header,
+.site-footer,
+main {
+  width: min(calc(100% - (var(--space-md) * 2)), var(--content-width));
+  margin-left: var(--space-md);
+  margin-right: auto;
+}
+
+@media (min-width: 48rem) {
+  .site-header,
+  .site-footer,
+  main {
+    margin-left: calc((100vw - 46.875rem) / 2 + var(--space-md));
+  }
+}
+
+@media (min-width: 62rem) {
+  .site-header,
+  .site-footer,
+  main {
+    margin-left: calc((100vw - 60.625rem) / 2 + var(--space-md));
+  }
+}
+
+@media (min-width: 75rem) {
+  .site-header,
+  .site-footer,
+  main {
+    margin-left: calc((100vw - 73.125rem) / 2 + var(--space-md));
+  }
+}
+
+main {
+  min-height: calc(100vh - 11.25rem);
+}
+
+.content {
+  padding-block: var(--space-3xl) var(--space-2xl);
+}
+
+.page-content {
+  max-width: var(--text-width);
+  font-size: clamp(1.0625rem, 0.25vw + 1rem, 1.125rem);
+  line-height: 1.62;
+}

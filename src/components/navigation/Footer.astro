@@ -1,17 +1,21 @@
+---
+import { author } from '../../lib/author';
+---
+
 <footer class="site-footer">
   <address class="footer-contact">
-    <strong>Борис Евдеев</strong>
-    <span class="footer-location">Нижний Новгород → Москва</span>
+    <strong>{author.name}</strong>
+    <span class="footer-location">{author.location}</span>
     <span class="footer-links">
       <a
-        href="https://t.me/evdeev"
+        href={author.contacts.telegram}
         data-analytics-event="telegram_click"
         data-analytics-section="footer"
         data-analytics-content-type="contact"
       >Телеграм</a>
       <span class="footer-separator" aria-hidden="true">·</span>
       <a
-        href="mailto:evdeev@gmail.com"
+        href={author.contacts.email}
         data-analytics-event="email_click"
         data-analytics-section="footer"
         data-analytics-content-type="contact"

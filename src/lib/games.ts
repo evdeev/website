@@ -1,6 +1,4 @@
-import type { CollectionEntry } from 'astro:content';
-
-type Game = CollectionEntry<'games'>;
+import type { Game } from './domain';
 
 const titleCollator = new Intl.Collator('ru-RU');
 

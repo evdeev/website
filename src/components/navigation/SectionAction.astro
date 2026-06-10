@@ -1,0 +1,32 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  showArrow?: boolean;
+  class?: string;
+  analyticsEvent?: string;
+  analyticsSection?: string;
+  analyticsContentType?: string;
+  analyticsNoteSlug?: string;
+}
+
+const {
+  href,
+  label,
+  showArrow = true,
+  class: className,
+  analyticsEvent,
+  analyticsSection,
+  analyticsContentType,
+  analyticsNoteSlug,
+} = Astro.props;
+---
+
+<a
+  class:list={['section-link', className]}
+  href={href}
+  data-analytics-event={analyticsEvent}
+  data-analytics-section={analyticsSection}
+  data-analytics-content-type={analyticsContentType}
+  data-analytics-note-slug={analyticsNoteSlug}
+>{label}{showArrow && ' →'}</a>

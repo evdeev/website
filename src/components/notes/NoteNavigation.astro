@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SectionAction from '../navigation/SectionAction.astro';
+import { typografText } from '../../lib/typography.mjs';
+
+interface Props {
+  nextNote?: CollectionEntry<'notes'>;
+  previousNote?: CollectionEntry<'notes'>;
+}
+
+const { nextNote, previousNote } = Astro.props;
+---
+
+<footer class="note-navigation">
+  <nav class="note-neighbors" aria-label="Соседние заметки">
+    {previousNote && (
+      <a
+        class="note-neighbor-link previous-note"
+        href={`/notes/${previousNote.data.slug}`}
+        data-analytics-event="notes_note_click"
+        data-analytics-section="note_navigation"
+        data-analytics-content-type="note"
+        data-analytics-note-slug={previousNote.data.slug}
+      >
+        <span class="note-neighbor-label">← Предыдущая заметка</span>
+        <span class="note-neighbor-title">{typografText(previousNote.data.title)}</span>
+      </a>
+    )}
+    {nextNote && (
+      <a
+        class="note-neighbor-link next-note"
+        href={`/notes/${nextNote.data.slug}`}
+        data-analytics-event="notes_note_click"
+        data-analytics-section="note_navigation"
+        data-analytics-content-type="note"
+        data-analytics-note-slug={nextNote.data.slug}
+      >
+        <span class="note-neighbor-label">Следующая заметка →</span>
+        <span class="note-neighbor-title">{typografText(nextNote.data.title)}</span>
+      </a>
+    )}
+  </nav>
+  <SectionAction
+    class="all-notes-link"
+    href="/notes"
+    label="Все заметки"
+    showArrow={false}
+    analyticsEvent="nav_click"
+    analyticsSection="note_navigation"
+    analyticsContentType="navigation"
+  />
+</footer>

@@ -1,0 +1,28 @@
+---
+import SectionAction from '../navigation/SectionAction.astro';
+
+interface Action {
+  href: string;
+  label: string;
+  showArrow?: boolean;
+  class?: string;
+  analyticsEvent?: string;
+  analyticsSection?: string;
+  analyticsContentType?: string;
+}
+
+interface Props {
+  title: string;
+  titleId: string;
+  class?: string;
+  action?: Action;
+}
+
+const { title, titleId, class: className, action } = Astro.props;
+---
+
+<section class={className} aria-labelledby={titleId}>
+  <h2 id={titleId}>{title}</h2>
+  <slot />
+  {action && <SectionAction {...action} />}
+</section>

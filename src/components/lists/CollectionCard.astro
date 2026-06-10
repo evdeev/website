@@ -1,0 +1,25 @@
+---
+import type { Collection } from '../../lib/domain';
+
+interface Props {
+  collection: Collection;
+  headingLevel?: 'h2' | 'h3';
+  upcoming?: boolean;
+}
+
+const { collection, headingLevel: Heading = 'h2', upcoming = false } = Astro.props;
+---
+
+<li class:list={['list-section-item', { 'is-upcoming': upcoming }]}>
+  <Heading class="list-section-title">
+    {collection.href ? (
+      <a
+        href={collection.href}
+        data-analytics-event="list_click"
+        data-analytics-section="lists"
+        data-analytics-content-type="list"
+      >{collection.title}</a>
+    ) : collection.title}
+  </Heading>
+  <p class="list-section-description">{collection.description}</p>
+</li>

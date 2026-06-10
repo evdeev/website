@@ -1,4 +1,4 @@
-import type { CollectionEntry } from 'astro:content';
+import type { CareerItem } from './domain';
 
 const MONTHS = [
   'январь',
@@ -27,11 +27,11 @@ function formatCareerDate(value: string): string {
   return month ? `${MONTHS[Number(month) - 1]} ${year}` : year;
 }
 
-export function sortCareerEntries(entries: CollectionEntry<'career'>[]): CollectionEntry<'career'>[] {
+export function sortCareerEntries(entries: CareerItem[]): CareerItem[] {
   return entries.sort((a, b) => careerDateValue(b.data.start) - careerDateValue(a.data.start));
 }
 
-export function getFeaturedCareer(entries: CollectionEntry<'career'>[]): CollectionEntry<'career'> {
+export function getFeaturedCareer(entries: CareerItem[]): CareerItem {
   const sortedEntries = sortCareerEntries(entries);
   const featuredEntries = sortedEntries.filter(({ data }) => data.featured);
   const currentEntries = sortedEntries.filter(({ data }) => data.end === 'present');

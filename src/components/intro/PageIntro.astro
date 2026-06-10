@@ -1,0 +1,20 @@
+---
+import { typografText } from '../../lib/typography.mjs';
+
+interface Props {
+  title?: string;
+  description?: string;
+  text?: string;
+  headingId?: string;
+}
+
+const { title, description, text, headingId } = Astro.props;
+const intro = description ?? text;
+---
+
+{title && <h1 class="section-title" id={headingId}>{typografText(title)}</h1>}
+{(intro || Astro.slots.has('default')) && (
+  <div class="page-intro">
+    {intro ? <p>{typografText(intro)}</p> : <slot />}
+  </div>
+)}

@@ -1,6 +1,4 @@
-import type { CollectionEntry } from 'astro:content';
-
-type Note = CollectionEntry<'notes'>;
+import type { Note } from './domain';
 
 export function sortNotes(notes: Note[]) {
   return notes.sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf());

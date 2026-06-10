@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SectionPreview from './SectionPreview.astro';
+import NoteCard from '../notes/NoteCard.astro';
+
+interface Props {
+  notes: CollectionEntry<'notes'>[];
+}
+
+const { notes } = Astro.props;
+---
+
+<SectionPreview
+  class="home-notes"
+  title="Заметки"
+  titleId="home-notes-title"
+  action={{
+    href: '/notes',
+    label: 'Все заметки',
+    class: 'all-notes-link',
+    analyticsEvent: 'nav_click',
+    analyticsSection: 'home_notes',
+    analyticsContentType: 'navigation',
+  }}
+>
+  <ol class="note-listing-list">
+    {notes.map((note) => (
+      <NoteCard note={note} headingLevel="h3" variant="compact" analyticsSection="home_notes" />
+    ))}
+  </ol>
+</SectionPreview>
