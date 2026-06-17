@@ -101,10 +101,10 @@ blockquote p {
 
 .note-content {
   max-width: var(--text-width);
-  font-family: var(--font-editorial);
-  font-size: clamp(1.15rem, 0.65vw + 1rem, 1.34rem);
+  font-family: var(--font-ui);
+  font-size: clamp(1.06rem, 0.35vw + 1rem, 1.2rem);
   font-weight: var(--font-weight-regular);
-  line-height: 1.68;
+  line-height: 1.72;
 }
 
 .note-content p + p {
@@ -114,24 +114,25 @@ blockquote p {
 .note-content > h2 {
   margin: 3.05em 0 0.9em;
   font-family: var(--font-ui);
-  font-size: clamp(1.75rem, 1.9vw + 1.1rem, 2.55rem);
+  font-size: clamp(1.55rem, 1.35vw + 1rem, 2.15rem);
   font-weight: var(--font-weight-bold);
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -0.035em;
 }
 
 .note-content > h3 {
   margin: 2.25em 0 0.65em;
   font-family: var(--font-ui);
-  font-size: clamp(1.28rem, 0.8vw + 1.05rem, 1.65rem);
+  font-size: clamp(1.22rem, 0.7vw + 1.02rem, 1.52rem);
   font-weight: var(--font-weight-bold);
-  line-height: 1.16;
+  line-height: 1.2;
   letter-spacing: -0.025em;
 }
 
 .note-content blockquote {
   margin-block: 2.15em;
   border-left-width: 0.125rem;
+  font-family: var(--font-editorial);
   font-size: 1.04em;
   line-height: 1.6;
 }
