@@ -11,21 +11,21 @@
 }
 
 .note-header h1 {
-  max-width: 12ch;
-  margin-block: var(--space-xs) var(--space-md);
+  max-width: 16ch;
+  margin-block: var(--space-xs) var(--space-sm);
   font-family: var(--font-ui);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.45rem, 6.2vw, 4.6rem);
   font-weight: var(--font-weight-bold);
-  line-height: 0.96;
-  letter-spacing: -0.06em;
+  line-height: 1.02;
+  letter-spacing: -0.052em;
 }
 
 .article-lead {
-  max-width: 17em;
+  max-width: 24em;
   color: var(--color-text);
   font-family: var(--font-editorial);
-  font-size: var(--font-size-lead);
-  line-height: var(--line-height-lead);
+  font-size: clamp(1.22rem, 0.7vw + 1rem, 1.55rem);
+  line-height: 1.52;
 }
 
 .home-page {
@@ -117,7 +117,13 @@
     padding-block: var(--space-lg) var(--space-xs);
   }
 
-  .note-header h1,
+  .note-header h1 {
+    max-width: 12ch;
+    font-size: clamp(2.55rem, 11.5vw, 3.65rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
   .home-intro h1 {
     letter-spacing: -0.055em;
   }
