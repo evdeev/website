@@ -11,17 +11,30 @@ const hasCounter = typeof counterId === 'string' && counterId.trim().length > 0;
 {hasCounter && (
   <>
     <script is:inline define:vars={{ counterId, noteSlug }}>
-      window.ym = window.ym || function () {
-        (window.ym.a = window.ym.a || []).push(arguments);
-      };
-      window.ym.l = 1 * new Date();
+      (function (window, document, tagName, scriptUrl, callbackName, scriptElement, firstScript) {
+        window[callbackName] = window[callbackName] || function () {
+          (window[callbackName].a = window[callbackName].a || []).push(arguments);
+        };
+        window[callbackName].l = 1 * new Date();
+
+        for (let index = 0; index < document.scripts.length; index += 1) {
+          if (document.scripts[index].src === scriptUrl) {
+            return;
+          }
+        }
+
+        scriptElement = document.createElement(tagName);
+        firstScript = document.getElementsByTagName(tagName)[0];
+        scriptElement.async = true;
+        scriptElement.src = scriptUrl;
+        firstScript.parentNode.insertBefore(scriptElement, firstScript);
+      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
       window.ym(counterId, 'init', {
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,
         webvisor: true,
-        defer: true,
       });
 
       const baseParams = () => ({
@@ -141,7 +154,6 @@ const hasCounter = typeof counterId === 'string' && counterId.trim().length > 0;
         trackReadingDepth();
       }
     </script>
-    <script is:inline src="https://mc.yandex.ru/metrika/tag.js"></script>
     <noscript>
       <div>
         <img src={`https://mc.yandex.ru/watch/${counterId}`} style="position:absolute; left:-9999px;" alt="" />
