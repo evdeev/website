@@ -15,7 +15,7 @@ const relatedNotes = await getRelatedNotes(currentNote);
 {relatedNotes.length > 0 && (
   <section class="related-notes" aria-labelledby="related-notes-title">
     <h2 id="related-notes-title">Связанные заметки</h2>
-    <ol class="related-notes-list">
+    <ul class="related-notes-list">
       {relatedNotes.map((note) => {
         const isCurrent = note.data.slug === currentSlug;
         const title = typografText(note.data.title);
@@ -38,6 +38,6 @@ const relatedNotes = await getRelatedNotes(currentNote);
           </li>
         );
       })}
-    </ol>
+    </ul>
   </section>
 )}

@@ -324,11 +324,12 @@
 }
 
 .related-notes-list {
-  padding-left: 1.25em;
+  padding: 0;
   margin: 0;
   color: var(--color-muted);
   font-size: 16px;
   line-height: 1.55;
+  list-style: none;
 }
 
 .related-notes-list a {
