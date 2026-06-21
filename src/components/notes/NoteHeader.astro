@@ -6,10 +6,9 @@ interface Props {
   description: string;
   intro?: string;
   created: Date;
-  tags: string[];
 }
 
-const { title, description, intro, created, tags } = Astro.props;
+const { title, description, intro, created } = Astro.props;
 const displayTitle = typografText(title);
 const formattedDate = new Intl.DateTimeFormat('ru-RU', {
   day: 'numeric',
@@ -24,5 +23,4 @@ const formattedDate = new Intl.DateTimeFormat('ru-RU', {
   <div class="article-lead">
     <p>{typografText(intro ?? description)}</p>
   </div>
-  {tags.length > 0 && <p class="note-tags">{tags.map((tag) => `#${tag}`).join(' ')}</p>}
 </header>

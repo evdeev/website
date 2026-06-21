@@ -1,28 +1,106 @@
 ---
-import { getCollection } from 'astro:content';
-import HomeCareer from '../components/home/HomeCareer.astro';
-import HomeIntro from '../components/intro/HeroIntro.astro';
-import HomeNotes from '../components/home/HomeNotes.astro';
-import PageLayout from '../layouts/PageLayout.astro';
-import { getFeaturedCareer } from '../lib/career';
-import { sortNotes } from '../lib/notes';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { author } from '../lib/author';
 import { getPageContent } from '../lib/pages';
+import { typografText } from '../lib/typography.mjs';
 
-const { page, Content } = await getPageContent('home');
-const recentNotes = sortNotes(await getCollection('notes', ({ data }) => !data.draft)).slice(0, 3);
-const featuredCareer = getFeaturedCareer(await getCollection('career'));
+const { page } = await getPageContent('home');
+const lead = page.data.lead ?? 'Создаю и развиваю цифровые кредитные решения для бизнеса. Превращаю сложные банковские процессы в понятные сервисы.';
+const personal = page.data.personal ?? 'Стреляю из лука, фотографирую, создаю инструменты и делаю вещи своими руками.';
+const sections = [
+  {
+    title: 'Заметки',
+    description: 'Выводы и модели мышления',
+    href: '/notes',
+    analyticsEvent: 'nav_click',
+    analyticsSection: 'home_sections',
+  },
+  {
+    title: 'Карьера',
+    description: 'Профессиональный опыт',
+    href: '/career',
+    analyticsEvent: 'career_click',
+    analyticsSection: 'home_sections',
+  },
+  {
+    title: 'Списки',
+    description: 'Подборки и коллекции',
+    href: '/lists',
+    analyticsEvent: 'nav_click',
+    analyticsSection: 'home_sections',
+  },
+];
 ---
 
-<PageLayout
-  title={page.data.title}
+<BaseLayout
   documentTitle="Борис Евдеев"
   description={page.data.description}
-  showTitle={false}
-  class="home-page"
+  showHeader={false}
+  showFooter={false}
+  bodyClass="home-body"
 >
-  <HomeIntro title="Борис Евдеев">
-    <Content />
-  </HomeIntro>
-  <HomeCareer career={featuredCareer} />
-  <HomeNotes notes={recentNotes} />
-</PageLayout>
+  <article class="home-page" id="top">
+    <header class="hero" aria-label={author.name}>
+      <span class="mascot hero__mascot" aria-hidden="true"></span>
+      <h1 class="hero__name">{author.name}</h1>
+      <p class="hero__lead">{typografText(lead)}</p>
+      <p class="hero__personal">{typografText(personal)}</p>
+    </header>
+
+    <nav class="section-nav" aria-label="Разделы сайта">
+      <ul class="section-nav__list">
+        {sections.map((section) => (
+          <li>
+            <a
+              class="section-link"
+              href={section.href}
+              data-analytics-event={section.analyticsEvent}
+              data-analytics-section={section.analyticsSection}
+              data-analytics-content-type="navigation"
+            >
+              <span class="section-link__title">{section.title}</span>
+              <span class="section-link__description">{section.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <footer class="home-footer">
+      <address class="home-footer__identity">
+        <strong class="home-footer__name">{author.name}</strong>
+        <span>{author.location}</span>
+        <span class="home-footer__links">
+          <a
+            href={author.contacts.telegram}
+            data-analytics-event="telegram_click"
+            data-analytics-section="footer"
+            data-analytics-content-type="contact"
+          >Телеграм</a>
+          <span class="home-footer__separator" aria-hidden="true">·</span>
+          <a
+            href={author.contacts.email}
+            data-analytics-event="email_click"
+            data-analytics-section="footer"
+            data-analytics-content-type="contact"
+          >Почта</a>
+        </span>
+      </address>
+      <div class="home-footer__meta">
+        <a
+          href="/policy"
+          data-analytics-event="nav_click"
+          data-analytics-section="footer"
+          data-analytics-content-type="policy"
+        >Политика конфиденциальности</a>
+        <a
+          class="home-footer__top"
+          href="#top"
+          data-analytics-event="back_to_top_click"
+          data-analytics-section="footer"
+          data-analytics-content-type="navigation"
+        >Наверх ↑</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

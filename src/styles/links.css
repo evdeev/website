@@ -1,14 +1,40 @@
 a {
-  color: var(--color-link);
-  text-decoration-color: var(--color-border);
-  text-decoration-thickness: 0.06em;
-  text-underline-offset: 0.24em;
+  color: var(--link-color);
+  text-decoration-line: var(--link-decoration-line);
+  text-decoration-color: var(--link-decoration-color);
+  text-decoration-thickness: var(--link-decoration-thickness);
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: none;
   transition:
-    color 160ms ease,
-    text-decoration-color 160ms ease;
+    color var(--transition-color),
+    text-decoration-color var(--transition-color);
 }
 
 a:hover {
-  color: var(--color-text);
-  text-decoration-color: currentColor;
+  color: var(--link-hover-color);
+  text-decoration-color: var(--link-hover-decoration-color);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.link-muted {
+  color: var(--link-muted-color);
+  text-decoration-color: var(--link-muted-decoration-color);
+}
+
+.link-muted:hover {
+  color: var(--link-muted-hover-color);
+  text-decoration-color: var(--link-muted-hover-decoration-color);
+}
+
+.link-plain {
+  text-decoration-line: none;
+}
+
+.link-plain:hover {
+  text-decoration-line: none;
 }

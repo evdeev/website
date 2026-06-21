@@ -11,19 +11,18 @@ interface Props {
   description: string;
   intro?: string;
   created: Date;
-  tags: string[];
   note: CollectionEntry<'notes'>;
   nextNote?: CollectionEntry<'notes'>;
   previousNote?: CollectionEntry<'notes'>;
 }
 
-const { title, description, intro, created, tags, note, nextNote, previousNote } = Astro.props;
+const { title, description, intro, created, note, nextNote, previousNote } = Astro.props;
 const noteSlug = Astro.url.pathname.replace(/^\/notes\//, '').replace(/\/$/, '');
 ---
 
 <BaseLayout documentTitle={title} description={description} analyticsNoteSlug={noteSlug}>
   <article class="content note-page">
-    <NoteHeader title={title} description={description} intro={intro} created={created} tags={tags} />
+    <NoteHeader title={title} description={description} intro={intro} created={created} />
     <Prose>
       <slot />
     </Prose>

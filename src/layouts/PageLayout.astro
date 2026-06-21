@@ -10,6 +10,9 @@ interface Props {
   showTitle?: boolean;
   class?: string;
   noindex?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  bodyClass?: string;
 }
 
 const {
@@ -20,10 +23,20 @@ const {
   showTitle = true,
   class: className,
   noindex = false,
+  showHeader = true,
+  showFooter = true,
+  bodyClass,
 } = Astro.props;
 ---
 
-<BaseLayout documentTitle={documentTitle} description={description} noindex={noindex}>
+<BaseLayout
+  documentTitle={documentTitle}
+  description={description}
+  noindex={noindex}
+  showHeader={showHeader}
+  showFooter={showFooter}
+  bodyClass={bodyClass}
+>
   <article class:list={['content', 'page-content', className]}>
     {showTitle && <PageIntro title={title} description={intro} />}
     <slot />

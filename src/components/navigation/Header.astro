@@ -1,46 +1,15 @@
 ---
 import { author } from '../../lib/author';
-
-const { pathname } = Astro.url;
-const isNotes = pathname === '/notes' || pathname.startsWith('/notes/');
-const isCareer = pathname === '/career' || pathname === '/career/';
-const isLists = pathname === '/lists' || pathname.startsWith('/lists/');
 ---
 
 <header class="site-header" id="top">
-  <nav class="site-nav" aria-label="Основная навигация">
+  <nav class="site-nav" aria-label="Навигация по сайту">
     <a
-      class="site-name"
+      class="site-back-link"
       href="/"
       data-analytics-event="nav_click"
       data-analytics-section="header"
       data-analytics-content-type="navigation"
     >{author.name}</a>
-    <div class="site-links">
-      <a
-        class:list={{ 'is-active': isNotes }}
-        aria-current={isNotes ? 'page' : undefined}
-        href="/notes"
-        data-analytics-event="nav_click"
-        data-analytics-section="header"
-        data-analytics-content-type="navigation"
-      >Заметки</a>
-      <a
-        class:list={{ 'is-active': isCareer }}
-        aria-current={isCareer ? 'page' : undefined}
-        href="/career"
-        data-analytics-event="nav_click"
-        data-analytics-section="header"
-        data-analytics-content-type="navigation"
-      >Карьера</a>
-      <a
-        class:list={{ 'is-active': isLists }}
-        aria-current={isLists ? 'page' : undefined}
-        href="/lists"
-        data-analytics-event="nav_click"
-        data-analytics-section="header"
-        data-analytics-content-type="navigation"
-      >Списки</a>
-    </div>
   </nav>
 </header>
