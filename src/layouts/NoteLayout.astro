@@ -20,7 +20,13 @@ const { title, description, intro, created, note, nextNote, previousNote } = Ast
 const noteSlug = Astro.url.pathname.replace(/^\/notes\//, '').replace(/\/$/, '');
 ---
 
-<BaseLayout documentTitle={title} description={description} analyticsNoteSlug={noteSlug}>
+<BaseLayout
+  documentTitle={title}
+  description={description}
+  analyticsNoteSlug={noteSlug}
+  siteNavSection="notes"
+  siteNavDepth="item"
+>
   <article class="content note-page">
     <NoteHeader title={title} description={description} intro={intro} created={created} />
     <Prose>

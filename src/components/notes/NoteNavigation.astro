@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import SectionAction from '../navigation/SectionAction.astro';
 import { typografText } from '../../lib/typography.mjs';
 
 interface Props {
@@ -40,13 +39,4 @@ const { nextNote, previousNote } = Astro.props;
       </a>
     )}
   </nav>
-  <SectionAction
-    class="all-notes-link"
-    href="/notes"
-    label="Все заметки"
-    showArrow={false}
-    analyticsEvent="nav_click"
-    analyticsSection="note_navigation"
-    analyticsContentType="navigation"
-  />
 </footer>

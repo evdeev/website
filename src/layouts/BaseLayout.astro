@@ -3,6 +3,7 @@ import globalStyles from '../styles/global.css?inline';
 import { typografText } from '../lib/typography.mjs';
 import Footer from '../components/navigation/Footer.astro';
 import Header from '../components/navigation/Header.astro';
+import SiteNav, { type SiteNavDepth, type SiteNavSection } from '../components/navigation/SiteNav.astro';
 import YandexMetrika from '../components/YandexMetrika.astro';
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   bodyClass?: string;
+  siteNavSection?: SiteNavSection;
+  siteNavDepth?: SiteNavDepth;
 }
 
 const {
@@ -23,10 +26,14 @@ const {
   showHeader = true,
   showFooter = true,
   bodyClass,
+  siteNavSection,
+  siteNavDepth = 'section',
 } = Astro.props;
 const displayTitle = typografText(documentTitle);
 const displayDescription = typografText(description);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const showSiteNav = Boolean(siteNavSection);
+const shouldShowHeader = showHeader && !showSiteNav;
 ---
 
 <!doctype html>
@@ -45,11 +52,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
     <title>{displayTitle}</title>
     <style is:inline set:html={globalStyles}></style>
   </head>
-  <body class:list={[bodyClass]}>
-    {showHeader && <Header />}
+  <body class:list={[bodyClass, showSiteNav && 'has-site-section-nav']}>
+    {showSiteNav && <SiteNav section={siteNavSection} depth={siteNavDepth} placement="desktop" />}
+    {showSiteNav && <SiteNav section={siteNavSection} depth={siteNavDepth} placement="mobile-home" />}
+    {shouldShowHeader && <Header />}
     <main>
       <slot />
     </main>
+    {showSiteNav && <SiteNav section={siteNavSection} depth={siteNavDepth} placement="mobile" />}
     {showFooter && <Footer />}
     <YandexMetrika noteSlug={analyticsNoteSlug} />
   </body>

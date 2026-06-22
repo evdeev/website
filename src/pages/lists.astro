@@ -13,6 +13,8 @@ const upcomingLists = collections.filter((list) => !list.href);
 <BaseLayout
   documentTitle="Списки Бориса Евдеева"
   description={page.data.description}
+  siteNavSection="lists"
+  siteNavDepth="section"
 >
   <section class="content lists-page">
     <PageIntro title={page.data.title} description={page.data.intro} />

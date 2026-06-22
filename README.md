@@ -37,6 +37,7 @@ src/
     navigation/
       Footer.astro
       Header.astro
+      SiteNav.astro
       SectionAction.astro
     notes/
       NoteCard.astro
@@ -163,6 +164,11 @@ HTML-тег `<title>` задаётся человекочитаемой фраз
 Страница `/manifesto` служебная: она не добавляется в основную навигацию, футер, список заметок,
 sitemap или RSS. Для неё включён `noindex` через `PageLayout` и исключение из sitemap в
 `astro.config.mjs`.
+
+Внутренние страницы основных разделов могут включать боковую навигацию через параметры layout:
+`siteNavSection="notes" | "career" | "lists"` и `siteNavDepth="section" | "item"`.
+На широких экранах `SiteNav.astro` показывает фиксированную левую навигацию, на мобильных -
+компактный блок перед футером.
 
 ## Новая заметка
 

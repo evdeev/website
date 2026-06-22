@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PageIntro from '../components/intro/PageIntro.astro';
+import type { SiteNavDepth, SiteNavSection } from '../components/navigation/SiteNav.astro';
 
 interface Props {
   title: string;
@@ -13,6 +14,8 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   bodyClass?: string;
+  siteNavSection?: SiteNavSection;
+  siteNavDepth?: SiteNavDepth;
 }
 
 const {
@@ -26,6 +29,8 @@ const {
   showHeader = true,
   showFooter = true,
   bodyClass,
+  siteNavSection,
+  siteNavDepth = 'section',
 } = Astro.props;
 ---
 
@@ -36,6 +41,8 @@ const {
   showHeader={showHeader}
   showFooter={showFooter}
   bodyClass={bodyClass}
+  siteNavSection={siteNavSection}
+  siteNavDepth={siteNavDepth}
 >
   <article class:list={['content', 'page-content', className]}>
     {showTitle && <PageIntro title={title} description={intro} />}

@@ -9,6 +9,12 @@ main {
   min-height: calc(100vh - 180px);
 }
 
+.site-section-nav--mobile,
+.site-section-nav--mobile-home {
+  width: min(calc(100% - (var(--page-padding-x) * 2)), var(--page-width));
+  margin-inline: auto;
+}
+
 .content {
   max-width: var(--content-width);
   padding: var(--content-padding-top) 0 var(--content-padding-bottom);
@@ -21,4 +27,20 @@ main {
 .home-page {
   max-width: var(--content-width);
   padding: var(--page-padding-top) 0 var(--page-padding-bottom);
+}
+
+@media (min-width: 769px) {
+  .has-site-section-nav {
+    --site-nav-page-left: max(
+      calc(var(--site-nav-left) + var(--site-nav-column-width) + var(--site-nav-gap)),
+      calc((100vw - var(--page-width)) / 2)
+    );
+  }
+
+  .has-site-section-nav main,
+  .has-site-section-nav .site-footer {
+    width: min(calc(100vw - var(--site-nav-page-left) - var(--page-padding-x)), var(--page-width));
+    margin-left: var(--site-nav-page-left);
+    margin-right: auto;
+  }
 }

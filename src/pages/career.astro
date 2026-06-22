@@ -14,7 +14,14 @@ const timeline = await Promise.all(careerEntries.map(async (career) => ({
 })));
 ---
 
-<PageLayout title={page.data.title} description={page.data.description} intro={page.data.intro} class="career-page">
+<PageLayout
+  title={page.data.title}
+  description={page.data.description}
+  intro={page.data.intro}
+  class="career-page"
+  siteNavSection="career"
+  siteNavDepth="section"
+>
   {hasContent && (
     <div class="page-body">
       <PageContent />

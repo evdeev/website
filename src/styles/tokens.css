@@ -43,6 +43,20 @@
   --content-padding-bottom: 56px;
   --inner-header-top: 40px;
   --inner-footer-top: 96px;
+  --inner-edge-offset: clamp(10px, 1vw, 18px);
+  --inner-scale: clamp(16px, 1.6vw, 20px);
+  --site-nav-left: var(--inner-edge-offset);
+  --site-nav-home-top: 8px;
+  --site-nav-column-width: calc(var(--inner-scale) * 8.2);
+  --site-nav-gap: calc(var(--inner-scale) * 1.35);
+  --site-nav-sections-gap: calc(var(--inner-scale) * 4.8);
+  --site-nav-item-gap: 0.45em;
+  --site-nav-font-size: clamp(14px, 1.25vw, 16px);
+  --site-nav-arrow-offset: 1.3em;
+  --site-nav-arrow-size: 1.35em;
+  --site-nav-mobile-home-top: 28px;
+  --site-nav-mobile-top: 52px;
+  --site-nav-mobile-gap: 18px;
 
   /* Links */
   --link-color: currentColor;
@@ -154,6 +168,11 @@
     --content-padding-top: 56px;
     --content-padding-bottom: 42px;
     --inner-header-top: 28px;
+    --inner-scale: 18px;
+    --site-nav-font-size: 16px;
+    --site-nav-mobile-home-top: 28px;
+    --site-nav-mobile-top: 42px;
+    --site-nav-mobile-gap: 34px;
 
     --mascot-width: 128px;
     --mascot-gap: 24px;

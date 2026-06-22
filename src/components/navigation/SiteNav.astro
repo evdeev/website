@@ -1,0 +1,80 @@
+---
+import { author } from '../../lib/author';
+
+export type SiteNavSection = 'notes' | 'career' | 'lists';
+export type SiteNavDepth = 'section' | 'item';
+export type SiteNavPlacement = 'desktop' | 'mobile-home' | 'mobile';
+
+interface Props {
+  section?: SiteNavSection;
+  depth?: SiteNavDepth;
+  placement?: SiteNavPlacement;
+}
+
+const { section, depth = 'section', placement = 'desktop' } = Astro.props;
+const showHomeLink = placement === 'desktop' || placement === 'mobile-home';
+const showSectionLinks = placement !== 'mobile-home';
+
+const sections: Array<{ key: SiteNavSection; label: string; href: string }> = [
+  { key: 'notes', label: 'Заметки', href: '/notes' },
+  { key: 'career', label: 'Карьера', href: '/career' },
+  { key: 'lists', label: 'Списки', href: '/lists' },
+];
+
+const getDirection = (key: SiteNavSection) => {
+  if (key !== section) {
+    return 'forward';
+  }
+
+  if (depth === 'item') {
+    return 'back';
+  }
+
+  return 'current';
+};
+---
+
+<nav
+  class:list={['site-section-nav', `site-section-nav--${placement}`]}
+  aria-label={placement === 'mobile-home' ? 'Навигация к главной' : 'Разделы сайта'}
+>
+  {showHomeLink && (
+    <a
+      class="site-section-nav__home"
+      href="/"
+      data-analytics-event="nav_click"
+      data-analytics-section={`site_nav_${placement}`}
+      data-analytics-content-type="navigation"
+    >
+      {author.name}
+    </a>
+  )}
+
+  {showSectionLinks && (
+    <ul class:list={['site-section-nav__list', depth === 'item' && 'has-parent-link']}>
+      {sections.map((item) => {
+        const direction = getDirection(item.key);
+        const isCurrent = direction === 'current';
+
+        return (
+          <li>
+            <a
+              class:list={[
+                'site-section-nav__link',
+                `site-section-nav__link--${direction}`,
+                isCurrent && 'is-current',
+              ]}
+              href={item.href}
+              aria-current={isCurrent ? 'page' : undefined}
+              data-analytics-event="nav_click"
+              data-analytics-section={`site_nav_${placement}`}
+              data-analytics-content-type="navigation"
+            >
+              <span>{item.label}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</nav>

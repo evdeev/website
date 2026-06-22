@@ -16,6 +16,8 @@ const hasHiddenNotes = notes.length > initialVisibleCount;
 <BaseLayout
   documentTitle="Заметки Бориса Евдеева"
   description={page.data.description}
+  siteNavSection="notes"
+  siteNavDepth="section"
 >
   <section class="content notes-page">
     <PageIntro title={page.data.title} description={page.data.intro} />
