@@ -97,4 +97,23 @@ const games = defineCollection({
   }),
 });
 
-export const collections = { pages, notes, series, career, games };
+const bookStatus = z.enum(['читаю', 'в очереди', 'прочитано', 'бросил']);
+
+const books = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/lists/books' }),
+  schema: z.object({
+    id: z.number().int().positive(),
+    title: z.string(),
+    subtitle: z.string().optional(),
+    authors: z.array(z.string()).min(1),
+    publisher: z.string(),
+    status: bookStatus,
+    status_order: z.number().int(),
+    year: z.number().int().optional(),
+    isbn: z.string().optional(),
+    category: z.string(),
+    tags: z.array(z.string()),
+  }),
+});
+
+export const collections = { pages, notes, series, career, games, books };

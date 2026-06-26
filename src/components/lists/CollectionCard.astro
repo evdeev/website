@@ -1,5 +1,6 @@
 ---
 import type { Collection } from '../../lib/domain';
+import { typografText } from '../../lib/typography.mjs';
 
 interface Props {
   collection: Collection;
@@ -11,15 +12,21 @@ const { collection, headingLevel: Heading = 'h2', upcoming = false } = Astro.pro
 ---
 
 <li class:list={['list-section-item', { 'is-upcoming': upcoming }]}>
-  <Heading class="list-section-title">
-    {collection.href ? (
-      <a
-        href={collection.href}
-        data-analytics-event="list_click"
-        data-analytics-section="lists"
-        data-analytics-content-type="list"
-      >{collection.title}</a>
-    ) : collection.title}
-  </Heading>
-  <p class="list-section-description">{collection.description}</p>
+  {collection.href ? (
+    <a
+      class="section-link"
+      href={collection.href}
+      data-analytics-event="list_click"
+      data-analytics-section="lists"
+      data-analytics-content-type="list"
+    >
+      <Heading class="section-link__title">{typografText(collection.title)}</Heading>
+      <span class="section-link__description">{typografText(collection.description)}</span>
+    </a>
+  ) : (
+    <div class="section-link">
+      <Heading class="section-link__title">{typografText(collection.title)}</Heading>
+      <span class="section-link__description">{typografText(collection.description)}</span>
+    </div>
+  )}
 </li>

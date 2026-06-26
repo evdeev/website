@@ -590,28 +590,12 @@ a.career-company:hover {
   margin-top: var(--list-item-gap);
 }
 
-.list-section-title {
-  margin: 0;
-  font-size: 27px;
-  font-weight: 680;
-  line-height: 1.1;
-  letter-spacing: -0.012em;
-}
-
-.list-section-title a {
-  color: var(--color-text);
+.lists-list .section-link {
   text-decoration-line: none;
 }
 
-.list-section-title a:hover {
-  color: var(--color-muted);
-}
-
-.list-section-description {
-  margin: 7px 0 0;
-  color: var(--color-muted);
-  font-size: 17px;
-  line-height: 1.45;
+.list-section-item .section-link__title {
+  margin: 0;
 }
 
 .upcoming-lists {
@@ -625,19 +609,38 @@ a.career-company:hover {
   line-height: 1.1;
 }
 
-.is-upcoming .list-section-title,
-.is-upcoming .list-section-description {
+.is-upcoming .section-link__title,
+.is-upcoming .section-link__description {
   color: var(--color-text-muted);
 }
 
-.games-count {
+.is-upcoming .section-link__title::after {
+  background: var(--color-text-muted);
+}
+
+.is-upcoming .section-link:hover .section-link__title {
+  color: var(--color-text-muted);
+}
+
+.is-upcoming .section-link:hover .section-link__title::after {
+  background: var(--color-text-muted);
+  transform: none;
+}
+
+.is-upcoming .section-link:hover .section-link__description {
+  color: var(--color-text-muted);
+}
+
+.games-count,
+.books-count {
   margin: 34px 0 0;
   color: var(--color-text-muted);
   font-size: 14px;
   line-height: 1.4;
 }
 
-.games-list {
+.games-list,
+.books-list {
   padding: 0;
   margin: 24px 0 0;
   list-style: none;
@@ -651,7 +654,13 @@ a.career-company:hover {
   border-top: var(--note-separator);
 }
 
-.game-list-item:last-child {
+.book-list-item {
+  padding: 16px 0;
+  border-top: var(--note-separator);
+}
+
+.game-list-item:last-child,
+.book-list-item:last-child {
   border-bottom: var(--note-separator);
 }
 
@@ -675,15 +684,35 @@ a.career-company:hover {
   min-width: 0;
 }
 
-.game-content h2 {
+.book-content {
+  min-width: 0;
+}
+
+.game-content h2,
+.book-content h2 {
   margin: 0;
   font-size: 21px;
   font-weight: 650;
   line-height: 1.2;
 }
 
+.book-subtitle {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
 .game-developer,
 .game-meta {
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.book-authors,
+.book-meta {
   margin-top: 4px;
   color: var(--color-muted);
   font-size: 14px;

@@ -1,0 +1,21 @@
+---
+import type { Book } from '../../lib/domain';
+import { formatBookStatus } from '../../lib/books';
+import { typografText } from '../../lib/typography.mjs';
+
+interface Props {
+  book: Book;
+}
+
+const { book } = Astro.props;
+const { title, subtitle, authors, publisher, status } = book.data;
+---
+
+<li class="book-list-item">
+  <div class="book-content">
+    <h2>{typografText(title)}</h2>
+    {subtitle && <p class="book-subtitle">{typografText(subtitle)}</p>}
+    <p class="book-authors">{authors.map((author) => typografText(author)).join(', ')}</p>
+    <p class="book-meta">{typografText(publisher)} <span aria-hidden="true">·</span> {formatBookStatus(status)}</p>
+  </div>
+</li>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 export type Note = CollectionEntry<'notes'>;
 export type CareerItem = CollectionEntry<'career'>;
 export type Game = CollectionEntry<'games'>;
+export type Book = CollectionEntry<'books'>;
 
 export type Project = {
   title: string;
@@ -31,4 +32,4 @@ export type Collection = {
   href?: string;
 };
 
-export type CollectionItem = Game;
+export type CollectionItem = Game | Book;

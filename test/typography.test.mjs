@@ -12,6 +12,10 @@ test('binds Russian short words to the following word', () => {
     ),
     `до${nbsp}дома про${nbsp}сайт по${nbsp}плану, но${nbsp}без${nbsp}спешки с${nbsp}другом у${nbsp}дома к${nbsp}вечеру и${nbsp}как${nbsp}получится чем${nbsp}кажется`,
   );
+  assert.equal(
+    typografText('Игры, в которые играл, с оценками и количеством прохождений.'),
+    `Игры, в${nbsp}которые играл, с${nbsp}оценками и${nbsp}количеством прохождений.`,
+  );
 });
 
 test('binds numbers, units, percentages, number signs and dates', () => {

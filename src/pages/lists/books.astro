@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BookItem from '../../components/lists/BookItem.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getBooksSummary, sortBooksByStatusOrder } from '../../lib/books';
+import { getPageContent } from '../../lib/pages';
+
+const { page, Content, hasContent } = await getPageContent('books');
+const books = sortBooksByStatusOrder(await getCollection('books'));
+const summary = getBooksSummary(books);
+---
+
+<PageLayout
+  title={page.data.title}
+  documentTitle="Книги Бориса Евдеева"
+  description={page.data.description}
+  class="books-page"
+  siteNavSection="lists"
+  siteNavDepth="item"
+>
+  {hasContent && (
+    <div class="page-body">
+      <Content />
+    </div>
+  )}
+  <p class="books-count">{summary}</p>
+  <ol class="books-list">
+    {books.map((book) => <BookItem book={book} />)}
+  </ol>
+</PageLayout>
