@@ -1,5 +1,5 @@
 export const siteConfig = {
   notes: {
-    initialVisibleCount: 10,
+    initialVisibleCount: 50,
   },
 };

@@ -364,7 +364,7 @@ cover: /images/games/astro-bot.webp
 ```ts
 export const siteConfig = {
   notes: {
-    initialVisibleCount: 10,
+    initialVisibleCount: 50,
   },
 };
 ```
