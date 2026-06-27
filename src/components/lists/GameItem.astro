@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { game } = Astro.props;
-const { title, developers, releaseYear, rating, status, playthroughs, cover } = game.data;
+const { title, developers, releaseYear, rating, status, playthroughs, cover, favorite = false } = game.data;
 const metadata = [
   rating !== undefined && `${rating}/10`,
   status,
@@ -21,7 +21,7 @@ const metadata = [
     <img class="game-cover" src={cover} alt="" width="240" height="320" loading="lazy" decoding="async" />
   </div>
   <div class="game-content">
-    <h2>{typografText(title)}</h2>
+    <h2 class:list={['favorite-title', favorite && 'has-favorite']}>{typografText(title)}</h2>
     <p class="game-developer">
       {developers.map((developer, index) => (
         <>

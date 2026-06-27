@@ -352,6 +352,7 @@ rating: 10
 status: Пройдено
 playthroughs: 1
 cover: /images/games/astro-bot.webp
+favorite: true
 ---
 ```
 
@@ -372,11 +373,16 @@ authors:
 publisher: "Альпина Паблишер"
 status: "прочитано"
 status_order: 30
+favorite: true
 category: "management"
 tags:
   - "личная эффективность"
 ---
 ```
+
+Если у игры, книги или будущей сущности есть поле `favorite: true`, рядом с названием выводится звезда. Иконка подключается
+через CSS-mask, а цвет и размер задаются токенами `--favorite-icon-color`,
+`--favorite-icon-size`, `--favorite-icon-gap` и `--favorite-icon-offset-y`.
 
 ## Стили
 

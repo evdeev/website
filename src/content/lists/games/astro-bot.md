@@ -8,4 +8,5 @@ rating: 9
 status: Прошел
 playthroughs: 2
 cover: /images/games/astro-bot.webp
+favorite: true
 ---

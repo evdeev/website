@@ -1,5 +1,5 @@
 ---
-title: "Middle-earth: Shadow of Mordor (PS4)"
+title: "Middle-earth: Shadow of Mordor"
 developers:
   - name: Monolith Productions
     url: https://www.lith.com/

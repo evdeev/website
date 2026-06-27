@@ -1,5 +1,5 @@
 ---
-title: "UNCHARTED: Legacy of Thieves Collection (PS5)"
+title: "UNCHARTED: Legacy of Thieves Collection"
 developers:
   - name: Naughty Dog
     url: https://www.naughtydog.com/
@@ -8,4 +8,5 @@ rating: 9
 status: Прошел
 playthroughs: 1
 cover: /images/games/uncharted-legacy-of-thieves.webp
+favorite: true
 ---

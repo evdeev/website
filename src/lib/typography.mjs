@@ -78,6 +78,8 @@ const initialsPattern = new RegExp(
   'gu',
 );
 const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<]+/giu;
+const finalRomanNumeralPattern = /([\p{L}])(?:[ \t\u00a0\u202f])+([IVXLCDM]{1,8})(?=$|[.,;:!?)]|\s)/gu;
+
 
 function bindShortWords(text) {
   return text.replace(boundWordPattern, `$1$2${nbsp}`);
@@ -96,6 +98,10 @@ function bindNumbers(text) {
     )
     .replace(percentPattern, `$1${nbsp}%`)
     .replace(numberUnitPattern, `$1${nbsp}$2`);
+}
+
+function bindFinalRomanNumerals(text) {
+  return text.replace(finalRomanNumeralPattern, `$1${nbsp}$2`);
 }
 
 function protectUrls(text, transform) {
@@ -119,7 +125,7 @@ function typografText(text, { preserveBreakingSpaces = false } = {}) {
   }
 
   let result = protectUrls(content, (protectedText) =>
-    bindNumbers(normalizeNumericRanges(bindShortWords(typograf.execute(protectedText)))),
+    bindFinalRomanNumerals(bindNumbers(normalizeNumericRanges(bindShortWords(typograf.execute(protectedText))))),
   );
 
   if (preserveBreakingSpaces) {

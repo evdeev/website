@@ -8,12 +8,12 @@ interface Props {
 }
 
 const { book } = Astro.props;
-const { title, subtitle, authors, publisher, status } = book.data;
+const { title, subtitle, authors, publisher, status, favorite = false } = book.data;
 ---
 
 <li class="book-list-item">
   <div class="book-content">
-    <h2>{typografText(title)}</h2>
+    <h2 class:list={['favorite-title', favorite && 'has-favorite']}>{typografText(title)}</h2>
     {subtitle && <p class="book-subtitle">{typografText(subtitle)}</p>}
     <p class="book-authors">{authors.map((author) => typografText(author)).join(', ')}</p>
     <p class="book-meta">{typografText(publisher)} <span aria-hidden="true">·</span> {formatBookStatus(status)}</p>

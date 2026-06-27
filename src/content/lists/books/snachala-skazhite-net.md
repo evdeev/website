@@ -7,6 +7,7 @@ authors:
 publisher: "Добрая книга"
 status: "прочитано"
 status_order: 30
+favorite: true
 category: "communication"
 tags:
   - "переговоры"

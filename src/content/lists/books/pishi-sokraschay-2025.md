@@ -8,6 +8,7 @@ authors:
 publisher: "Альпина Паблишер"
 status: "читаю"
 status_order: 10
+favorite: true
 category: "communication"
 tags:
   - "текст"

@@ -46,6 +46,7 @@ const notes = defineCollection({
     updated: noteDate.optional(),
     draft: z.boolean(),
     tags: z.array(z.string()),
+    favorite: z.boolean().optional(),
     cover: z.string().optional(),
     relatedNotes: z.array(z.string()).optional(),
     relatedCareer: z.array(z.string()).optional(),
@@ -94,6 +95,7 @@ const games = defineCollection({
     status: z.string().optional(),
     playthroughs: z.number().int().positive().optional(),
     cover: z.string(),
+    favorite: z.boolean().optional(),
   }),
 });
 
@@ -113,6 +115,7 @@ const books = defineCollection({
     isbn: z.string().optional(),
     category: z.string(),
     tags: z.array(z.string()),
+    favorite: z.boolean().optional(),
   }),
 });
 

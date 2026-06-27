@@ -1,5 +1,5 @@
 ---
-title: Ratchet & Clank (PS4)
+title: Ratchet & Clank
 developers:
   - name: Insomniac Games
     url: https://insomniac.games/

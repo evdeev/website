@@ -8,4 +8,5 @@ rating: 8
 status: Прошел
 playthroughs: 1
 cover: /images/games/god-of-war-ragnarok.webp
+favorite: true
 ---

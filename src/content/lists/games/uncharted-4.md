@@ -8,4 +8,5 @@ rating: 10
 status: Прошел
 playthroughs: 2
 cover: /images/games/uncharted-4.webp
+favorite: true
 ---

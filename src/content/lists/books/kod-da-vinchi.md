@@ -6,6 +6,7 @@ authors:
 publisher: "АСТ"
 status: "прочитано"
 status_order: 30
+favorite: true
 category: "fiction"
 tags:
   - "художественное"

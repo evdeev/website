@@ -8,4 +8,5 @@ rating: 10
 status: Прошел
 playthroughs: 3
 cover: /images/games/rdr2.webp
+favorite: true
 ---

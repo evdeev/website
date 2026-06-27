@@ -1,5 +1,5 @@
 ---
-title: "Injustice: Gods Among Us Ultimate Edition (PS4)"
+title: "Injustice: Gods Among Us Ultimate Edition"
 developers:
   - name: NetherRealm Studios
     url: https://www.netherrealm.com/

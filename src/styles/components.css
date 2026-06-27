@@ -696,6 +696,20 @@ a.career-company:hover {
   line-height: 1.2;
 }
 
+.favorite-title.has-favorite::after {
+  content: "";
+  display: inline-block;
+  width: var(--favorite-icon-size);
+  height: var(--favorite-icon-size);
+  margin-left: var(--favorite-icon-gap);
+  margin-right: var(--favorite-icon-overhang);
+  margin-bottom: var(--favorite-icon-offset-y);
+  background: var(--favorite-icon-color);
+  vertical-align: baseline;
+  -webkit-mask: var(--favorite-icon-mask) center / contain no-repeat;
+  mask: var(--favorite-icon-mask) center / contain no-repeat;
+}
+
 .book-subtitle {
   margin: 4px 0 0;
   color: var(--color-text-muted);
@@ -793,6 +807,16 @@ a.career-company:hover {
 }
 
 @media (min-width: 769px) {
+  .site-header {
+    position: fixed;
+    top: var(--site-nav-home-top);
+    left: var(--site-nav-left);
+    z-index: 10;
+    width: auto;
+    margin: 0;
+    padding-top: 0;
+  }
+
   .site-section-nav--desktop {
     position: fixed;
     top: var(--site-nav-home-top);
