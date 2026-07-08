@@ -6,25 +6,24 @@ import { typografText } from '../lib/typography.mjs';
 
 const { page } = await getPageContent('home');
 const lead = page.data.lead ?? 'Создаю и развиваю цифровые кредитные решения для бизнеса. Превращаю сложные банковские процессы в понятные сервисы.';
-const personal = page.data.personal ?? 'Стреляю из лука, фотографирую, создаю инструменты и делаю вещи своими руками.';
 const sections = [
   {
     title: 'Заметки',
-    description: 'Выводы и модели мышления',
+    description: 'Мысли и наблюдения',
     href: '/notes',
     analyticsEvent: 'nav_click',
     analyticsSection: 'home_sections',
   },
   {
-    title: 'Профессиональный путь',
-    description: 'От сопровождения к продуктам',
+    title: 'Опыт',
+    description: 'Профессиональный путь',
     href: '/career',
     analyticsEvent: 'career_click',
     analyticsSection: 'home_sections',
   },
   {
     title: 'Списки',
-    description: 'Подборки и коллекции',
+    description: 'Интересы и рекомендации',
     href: '/lists',
     analyticsEvent: 'nav_click',
     analyticsSection: 'home_sections',
@@ -44,7 +43,6 @@ const sections = [
       <span class="mascot hero__mascot" aria-hidden="true"></span>
       <h1 class="hero__name">{author.name}</h1>
       <p class="hero__lead">{typografText(lead)}</p>
-      <p class="hero__personal">{typografText(personal)}</p>
     </header>
 
     <nav class="section-nav" aria-label="Разделы сайта">

@@ -107,7 +107,7 @@
   --section-description-size: 19px;
   --section-description-line: 1.36;
   --section-description-color: var(--color-muted);
-  --section-description-hover-color: var(--color-text);
+  --section-description-hover-color: var(--color-muted);
 
   /* Arrow */
   --arrow-size: 0.72em;
