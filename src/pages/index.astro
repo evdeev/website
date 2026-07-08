@@ -6,6 +6,7 @@ import { typografText } from '../lib/typography.mjs';
 
 const { page } = await getPageContent('home');
 const lead = page.data.lead ?? 'Создаю и развиваю цифровые кредитные решения для бизнеса. Превращаю сложные банковские процессы в понятные сервисы.';
+const personal = page.data.personal;
 const sections = [
   {
     title: 'Заметки',
@@ -43,6 +44,7 @@ const sections = [
       <span class="mascot hero__mascot" aria-hidden="true"></span>
       <h1 class="hero__name">{author.name}</h1>
       <p class="hero__lead">{typografText(lead)}</p>
+      {personal && <p class="hero__personal">{typografText(personal)}</p>}
     </header>
 
     <nav class="section-nav" aria-label="Разделы сайта">
