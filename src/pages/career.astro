@@ -5,9 +5,10 @@ import CareerTimeline from '../components/career/CareerTimeline.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { sortCareerEntries } from '../lib/career';
 import { getPageContent } from '../lib/pages';
+import { typografText } from '../lib/typography.mjs';
 
 const { page, Content: PageContent, hasContent } = await getPageContent('career');
-const careerEntries = sortCareerEntries(await getCollection('career'));
+const careerEntries = sortCareerEntries(await getCollection('career')).toReversed();
 const timeline = await Promise.all(careerEntries.map(async (career) => ({
   career,
   Content: (await render(career)).Content,
@@ -34,4 +35,9 @@ const timeline = await Promise.all(careerEntries.map(async (career) => ({
       </CareerItem>
     ))}
   </CareerTimeline>
+  {page.data.afterword && (
+    <div class="page-body career-afterword">
+      <p>{typografText(page.data.afterword)}</p>
+    </div>
+  )}
 </PageLayout>

@@ -471,6 +471,10 @@
   list-style: none;
 }
 
+.career-afterword {
+  margin-top: var(--section-gap);
+}
+
 .career-timeline-item {
   display: grid;
   grid-template-columns: 170px minmax(0, 1fr);
@@ -868,6 +872,10 @@ a.career-company:hover {
 }
 
 @media (max-width: 640px) {
+  .career-page .section-title {
+    font-size: 37px;
+  }
+
   .note-listing-item {
     padding-block: 22px;
   }

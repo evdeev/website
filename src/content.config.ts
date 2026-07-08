@@ -30,6 +30,7 @@ const pages = defineCollection({
     lead: z.string().optional(),
     personal: z.string().optional(),
     intro: z.string().optional(),
+    afterword: z.string().optional(),
   }),
 });
 
