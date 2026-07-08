@@ -501,6 +501,11 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.career-location {
+  display: block;
+  margin-top: 5px;
+}
+
 a.career-company:hover {
   color: var(--color-text);
 }
@@ -900,6 +905,15 @@ a.career-company:hover {
   .career-timeline-meta {
     margin-bottom: 10px;
     padding-top: 0;
+  }
+
+  .career-location {
+    display: inline;
+    margin-top: 0;
+  }
+
+  .career-location::before {
+    content: ", ";
   }
 
   .career-timeline-content {

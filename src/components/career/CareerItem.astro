@@ -24,7 +24,8 @@ const companyTitle = typografText(career.data.title);
             data-analytics-content-type="company"
           >{companyTitle}</a>
         )
-        : <span class="career-company">{companyTitle}</span>}, {typografText(career.data.location)}
+        : <span class="career-company">{companyTitle}</span>}
+      <span class="career-location">{typografText(career.data.location)}</span>
     </p>
     <p class="career-period">{formatCareerPeriod(career.data.start, career.data.end)}</p>
   </div>
